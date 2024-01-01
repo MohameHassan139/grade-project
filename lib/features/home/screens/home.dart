@@ -1,15 +1,13 @@
+import 'package:ar_shopping/features/home/models/product.dart';
+import 'package:ar_shopping/features/home/widgets/cart_appbar_action.dart';
+import 'package:ar_shopping/features/home/widgets/category_tile.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
-
 import '../../../constants/app_colors.dart';
-import '../../../constants/constants.dart';
-import '../../auth/widgets/custom_appbar.dart';
 import '../../auth/widgets/custom_body_bacground.dart';
-import '../../auth/widgets/gadien_text.dart';
-import '../models/movie.dart';
+
 import '../models/news_item.dart';
 import '../widgets/carousle_silder.dart';
-import '../widgets/masked_image.dart';
+import '../widgets/custom_appbar.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({
@@ -25,60 +23,59 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
+    var listViewPadding =
+        const EdgeInsets.symmetric(horizontal: 16, vertical: 24);
     final screenHight = MediaQuery.of(context).size.height;
     final screenWidth = MediaQuery.of(context).size.width;
     return Scaffold(
         backgroundColor: CustomColors.kBlackColor,
-        appBar: AppBar(),
-        body: SingleChildScrollView(
-          child: CustomBody(
-            bodyHeight: screenHight,
-            bodyWidth: screenWidth,
-            child: Center(
+        appBar: CustomAppbar(
+          title: '',
+          actions: const [
+            CartAppBarAction(),
+          ],
+        ),
+        body: CustomBody(
+          bodyHeight: screenHight,
+          bodyWidth: screenWidth,
+          child: Center(
+            child: SingleChildScrollView(
               child: Column(
                 children: [
                   CustomCarousleSlider(
                     news: news,
                   ),
-                  SizedBox(
-                    height: 10,
-                  ),
-                  GridView.builder(
-                    physics: const BouncingScrollPhysics(),
+                  ListView(
                     shrinkWrap: true,
-                    // scrollDirection: Axis.horizontal,
-                    itemCount: newMovies.length,
-                    itemBuilder: ((context, index) {
-                      String mask;
-                      if (index == 0) {
-                        mask = Constants.kMaskFirstIndex;
-                      } else if (index % 3 == 0) {
-                        mask = Constants.kMaskFirstIndex;
-                      } else if (index % 2 == 0 || index == 1) {
-                        mask = Constants.kMaskCenter;
-                      } else {
-                        mask = Constants.kMaskLastIndex;
-                      }
-                      return GestureDetector(
-                        child: Container(
-                          margin: const EdgeInsets.only(
-                            top: 20,
-                            left: 20,
-                          ),
-                          height: 160,
-                          width: 142,
-                          child: MaskedImage(
-                            asset: newMovies[index].moviePoster,
-                            mask: mask,
-                          ),
-                        ),
-                      );
-                    }),
-                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                        crossAxisCount: 3),
-                  ),
-                  const SizedBox(
-                    height: 38,
+                    physics: BouncingScrollPhysics(),
+                    padding: listViewPadding,
+                    children: [
+                      Text(
+                        'Shop by Category',
+                        style: Theme.of(context)
+                            .textTheme
+                            .headlineSmall
+                            ?.copyWith(color: CustomColors.kWhiteColor),
+                      ),
+                      const SizedBox(height: 16),
+                      CategoryTile(
+                        imageUrl: manLookRightImageUrl,
+                        category: mensCategory,
+                        imageAlignment: Alignment.topCenter,
+                      ),
+                      const SizedBox(height: 16),
+                      CategoryTile(
+                        imageUrl: womanLookLeftImageUrl,
+                        category: womensCategory,
+                        imageAlignment: Alignment.topCenter,
+                      ),
+                      const SizedBox(height: 16),
+                      CategoryTile(
+                        imageUrl:
+                            dogImageUrl, // TODO: Replace with your own image
+                        category: petsCategory,
+                      ),
+                    ],
                   ),
                 ],
               ),
@@ -89,3 +86,10 @@ class _HomePageState extends State<HomePage> {
         );
   }
 }
+
+const String manLookRightImageUrl =
+    'https://th.bing.com/th/id/OIP.ziNAhJV_iUGwYfttQpoD5QHaD3?w=1998&h=1045&rs=1&pid=ImgDetMain';
+const String dogImageUrl =
+    'https://www.homelane.com/blog/wp-content/uploads/2022/10/drawing-room-wall-tiles-450x313.jpg';
+const String womanLookLeftImageUrl =
+    'https://th.bing.com/th/id/R.fab962aefd58bd35734b02ef3569712f?rik=FfFsDUZScjERBg&pid=ImgRaw&r=0&sres=1&sresct=1';

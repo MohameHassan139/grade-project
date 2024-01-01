@@ -8,5 +8,6 @@ class CustomColors {
   static const Color kBlackColor = Color(0xFF19191B);
   static const Color kYellowColor = Color(0xFFF2A33A);
   static const Color kWhiteColor = Color(0xFFFFFFFF);
-  static const Color kGreyColor = Color(0xFF767680);
+  static const Color kGreyColor = Color.fromARGB(255, 166, 166, 175);
+  static final Color? kGreyBackground = Colors.grey[200];
 }

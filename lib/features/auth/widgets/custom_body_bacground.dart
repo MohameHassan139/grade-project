@@ -41,31 +41,31 @@ class CustomBody extends StatelessWidget {
             ),
           ),
           Positioned(
-            top: -88,
-            right: -88,
+            top: -100,
+            right: -100,
             child: Container(
-              height: 166,
-              width: 166,
+              height: 200,
+              width: 200,
               decoration: BoxDecoration(
                 shape: BoxShape.circle,
                 color: CustomColors.kPinkColor.withOpacity(0.5),
               ),
               child: BackdropFilter(
                 filter: ImageFilter.blur(
-                  sigmaX: 166,
-                  sigmaY: 166,
+                  sigmaX: 100,
+                  sigmaY: 100,
                 ),
                 child: Container(
-                  height: 166,
-                  width: 166,
+                  height: 200,
+                  width: 200,
                   color: Colors.transparent,
                 ),
               ),
             ),
           ),
           Positioned(
-            bottom: -100,
-            left: -100,
+            bottom: -50,
+            left: -50,
             child: Container(
               height: 200,
               width: 200,

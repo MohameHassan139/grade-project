@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import '../../../constants/app_colors.dart';
-import 'custom_outline.dart';
+import '../../constants/app_colors.dart';
+import '../../features/auth/widgets/custom_outline.dart';
 
 class CustomBottom extends StatelessWidget {
   VoidCallback? onTap;
@@ -11,7 +11,7 @@ class CustomBottom extends StatelessWidget {
   Widget build(BuildContext context) {
     screenHight ?? 0;
     return GestureDetector(
-      onTap: () {},
+      onTap: onTap,
       child: CustomOutline(
         strokeWidth: 3,
         radius: 20,
