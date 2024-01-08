@@ -40,21 +40,21 @@ class NewsItem {
 List<NewsItem> news = [
   NewsItem(
     author: 'mohamed hassa',
-    category: 'Sport',
+    category: 'bedroom',
     id: 1,
     imgUrl: imgList[0],
     title: 'fake news by me',
   ),
   NewsItem(
     author: 'mohamed hassa',
-    category: 'madicale',
+    category: 'salon',
     id: 1,
     imgUrl: imgList[1],
     title: 'fake news by me',
   ),
   NewsItem(
     author: 'mohamed hassa',
-    category: 'political',
+    category: 'sallon',
     id: 1,
     imgUrl: imgList[2],
     title:
@@ -62,21 +62,21 @@ List<NewsItem> news = [
   ),
   NewsItem(
     author: 'mohamed hassa',
-    category: 'Sport',
+    category: 'live room',
     id: 1,
     imgUrl: imgList[3],
     title: 'fake news by me',
   ),
   NewsItem(
     author: 'mohamed hassa',
-    category: 'econemmic',
+    category: 'live room',
     id: 1,
     imgUrl: imgList[4],
     title: 'fake news by me',
   ),
   NewsItem(
     author: 'CNNA',
-    category: 'Science',
+    category: 'salon',
     id: 1,
     imgUrl: imgList[5],
     title: 'fake news by me',
@@ -84,10 +84,10 @@ List<NewsItem> news = [
 ];
 
 final List<String> imgList = [
-  'https://th.bing.com/th/id/OIP.ziNAhJV_iUGwYfttQpoD5QHaD3?w=1998&h=1045&rs=1&pid=ImgDetMain',
-  'https://images.unsplash.com/photo-1522205408450-add114ad53fe?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=368f45b0888aeb0b7b08e3a1084d3ede&auto=format&fit=crop&w=1950&q=80',
-  'https://images.unsplash.com/photo-1519125323398-675f0ddb6308?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=94a1e718d89ca60a6337a6008341ca50&auto=format&fit=crop&w=1950&q=80',
-  'https://images.unsplash.com/photo-1523205771623-e0faa4d2813d?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=89719a0d55dd05e2deae4120227e6efc&auto=format&fit=crop&w=1953&q=80',
-  'https://images.unsplash.com/photo-1508704019882-f9cf40e475b4?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=8c6e5e3aba713b17aa1fe71ab4f0ae5b&auto=format&fit=crop&w=1352&q=80',
-  'https://images.unsplash.com/photo-1519985176271-adb1088fa94c?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=a0c8d632e977f94e5d312d9893258f59&auto=format&fit=crop&w=1355&q=80'
+  'https://ledworld.com.au/wp-content/uploads/2018/08/LEDWorldParisRoseHairArtistrySalon05-1030x688.jpg',
+  'https://ledworld.com.au/wp-content/uploads/2018/08/LEDWorldParisRoseHairArtistrySalon05-1030x688.jpg',
+  'https://ledworld.com.au/wp-content/uploads/2018/11/Paris-Rose-Hair-Salon-3-599x374.jpg',
+  'https://ledworld.com.au/wp-content/uploads/2018/08/LEDWorldParisRoseHairArtistrySalon15.jpg',
+  'https://hendrxhair.co/wp-content/uploads/2018/04/ISKA_028.jpg',
+  'https://hendrxhair.co/wp-content/uploads/2018/04/ISKA_028.jpg',
 ];

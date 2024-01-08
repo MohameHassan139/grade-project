@@ -3,7 +3,7 @@ import 'package:ar_shopping/features/home/widgets/cart_appbar_action.dart';
 import 'package:ar_shopping/features/home/widgets/category_tile.dart';
 import 'package:flutter/material.dart';
 import '../../../constants/app_colors.dart';
-import '../../auth/widgets/custom_body_bacground.dart';
+import '../../../core/component/custom_body_bacground.dart';
 
 import '../models/news_item.dart';
 import '../widgets/carousle_silder.dart';

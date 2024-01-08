@@ -3,7 +3,7 @@ import 'package:google_fonts/google_fonts.dart';
 
 import '../../../constants/app_colors.dart';
 import '../widgets/custom_appbar.dart';
-import '../widgets/custom_body_bacground.dart';
+import '../../../core/component/custom_body_bacground.dart';
 import '../../../core/component/custom_botton.dart';
 import '../widgets/custom_textformfield.dart';
 import '../widgets/gadien_text.dart';
@@ -120,9 +120,10 @@ class _MyHomePageState extends State<LoginPage> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         const Text(
-                          "Do'n have an acount ",
+                          "Do'n have an acount",
                           style: TextStyle(
-                              color: Colors.black, fontWeight: FontWeight.w600),
+                              color: CustomColors.kGreyColor,
+                              fontWeight: FontWeight.w600),
                         ),
                         TextButton(
                           onPressed: () {},

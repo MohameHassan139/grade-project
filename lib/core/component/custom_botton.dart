@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import '../../constants/app_colors.dart';
-import '../../features/auth/widgets/custom_outline.dart';
+import 'custom_outline.dart';
 
 class CustomBottom extends StatelessWidget {
   VoidCallback? onTap;

@@ -3,7 +3,7 @@ import 'package:google_fonts/google_fonts.dart';
 
 import '../../../constants/app_colors.dart';
 import '../widgets/custom_appbar.dart';
-import '../widgets/custom_body_bacground.dart';
+import '../../../core/component/custom_body_bacground.dart';
 import '../../../core/component/custom_botton.dart';
 import '../widgets/custom_textformfield.dart';
 import '../widgets/gadien_text.dart';

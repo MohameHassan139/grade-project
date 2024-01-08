@@ -1,5 +1,5 @@
 import 'package:ar_shopping/constants/app_colors.dart';
-import 'package:ar_shopping/features/home/function/push_screen.dart';
+import 'package:ar_shopping/core/function/push_screen.dart';
 import 'package:ar_shopping/features/home/models/product.dart';
 import 'package:ar_shopping/features/home/screens/product_screen.dart';
 import 'package:ar_shopping/features/home/widgets/product_image.dart';

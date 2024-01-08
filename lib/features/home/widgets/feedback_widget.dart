@@ -18,7 +18,8 @@ class FeedbackWidget extends StatelessWidget {
       title: Text(
         feedback.userName,
         style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-            color: CustomColors.kGreyColor, fontWeight: FontWeight.bold),
+            color: const Color.fromARGB(255, 218, 218, 227),
+            fontWeight: FontWeight.bold),
       ),
       subtitle: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -31,10 +32,10 @@ class FeedbackWidget extends StatelessWidget {
                 .textTheme
                 .bodyLarge
                 ?.copyWith(color: CustomColors.kWhiteColor),
-            colorClickableText: CustomColors.kCyanColor,
+            colorClickableText: CustomColors.kGreyColor,
             trimMode: TrimMode.Line,
-            trimCollapsedText: 'Show more',
-            trimExpandedText: 'Show less',
+            trimCollapsedText: ' Show more',
+            trimExpandedText: ' Show less',
             moreStyle: Theme.of(context)
                 .textTheme
                 .bodyMedium

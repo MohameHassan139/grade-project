@@ -25,15 +25,19 @@ class Product {
 
 List<Product> products = [
   Product(
-      name: 'Pack Crewneck chair - Black',
-      imageUrls: [
-        'https://comfortel.co.uk/wp-content/uploads/1-Boho-Salon-Furniture-Interior-Design-Salon-1.jpg',
-        'https://i.pinimg.com/originals/b6/59/ff/b659ff0510f4beb5bf22a77916389211.jpg'
-      ],
-      cost: 12.99,
-      category: mensCategory,
-      productType: 'chair',
-      sizes: ['S', 'M', 'L', 'XL']),
+    name: 'Pack Crewneck chair - Black',
+    imageUrls: [
+      'https://comfortel.co.uk/wp-content/uploads/1-Boho-Salon-Furniture-Interior-Design-Salon-1.jpg',
+      'https://i.pinimg.com/originals/b6/59/ff/b659ff0510f4beb5bf22a77916389211.jpg'
+    ],
+    cost: 12.99,
+    category: mensCategory,
+    productType: 'chair',
+    sizes: [
+      'small',
+      'mediam',
+    ],
+  ),
   Product(
     name: 'Short chair',
     imageUrls: [
@@ -45,7 +49,11 @@ List<Product> products = [
     cost: 17.99,
     category: mensCategory,
     productType: 'chair',
-    sizes: ['XS', 'S', 'M', 'L', 'XL'],
+    sizes: [
+      'small',
+      'mediam',
+      'large',
+    ],
   ),
   Product(
     name: 'nice chair ',
@@ -56,7 +64,11 @@ List<Product> products = [
     cost: 24.99,
     category: mensCategory,
     productType: 'chair',
-    sizes: ['XS', 'S', 'M', 'L', 'XL'],
+    sizes: [
+      'small',
+      'mediam',
+      'large',
+    ],
   ),
   Product(
     name: 'An ashdb',
@@ -67,7 +79,7 @@ List<Product> products = [
     cost: 29.99,
     category: mensCategory,
     productType: 'tabel',
-    sizes: ['XS', 'S', 'M', 'L', 'XL'],
+    sizes: [],
   ),
   Product(
     name: "mab lab lis",

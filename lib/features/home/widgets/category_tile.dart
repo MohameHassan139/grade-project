@@ -1,4 +1,4 @@
-import 'package:ar_shopping/features/home/function/push_screen.dart';
+import 'package:ar_shopping/core/function/push_screen.dart';
 import 'package:ar_shopping/features/home/models/category.dart';
 import 'package:ar_shopping/features/home/models/product.dart';
 import 'package:ar_shopping/features/home/screens/category_screen.dart';

@@ -1,4 +1,4 @@
-import 'package:ar_shopping/features/auth/widgets/custom_body_bacground.dart';
+import 'package:ar_shopping/core/component/custom_body_bacground.dart';
 import 'package:ar_shopping/features/home/models/category.dart';
 import 'package:ar_shopping/features/home/models/product.dart';
 import 'package:ar_shopping/features/home/widgets/cart_appbar_action.dart';
@@ -46,13 +46,11 @@ class _CategoryScreenState extends State<CategoryScreen> {
     return Scaffold(
       backgroundColor: CustomColors.kBlackColor,
       appBar: CustomAppbar(
-       
-        
         title: category.title,
         actions: const [
           CartAppBarAction(),
         ],
-         ),
+      ),
       body: CustomBody(
         bodyHeight: screenHight,
         bodyWidth: screenWidth,

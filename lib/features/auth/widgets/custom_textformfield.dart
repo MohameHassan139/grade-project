@@ -46,9 +46,9 @@ class CustomTextFormField extends StatelessWidget {
           prefixIcon: prefixIcon,
           labelText: '$labelText',
           labelStyle: const TextStyle(
-            fontSize: 20,
+            fontSize: 18,
             fontWeight: FontWeight.w500,
-            color: CustomColors.kCyanColor,
+            color: CustomColors.kGreyColor,
           ),
           enabledBorder: OutlineInputBorder(
               borderSide: BorderSide(color: Colors.black.withOpacity(.3)),
@@ -72,7 +72,7 @@ class CustomTextFormField extends StatelessWidget {
           fontSize: 20,
           fontWeight: FontWeight.w700,
           height: 1,
-          // color: AppColor.hintTextColor,
+          // color: CustomColors.kCyanColor,
         ),
       ),
     );

@@ -1,4 +1,4 @@
-import 'package:ar_shopping/features/auth/widgets/custom_body_bacground.dart';
+import 'package:ar_shopping/core/component/custom_body_bacground.dart';
 import 'package:ar_shopping/core/component/custom_botton.dart';
 import 'package:ar_shopping/features/home/widgets/cart_appbar_action.dart';
 import 'package:ar_shopping/features/home/widgets/cart_list.dart';
