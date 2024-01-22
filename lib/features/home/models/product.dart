@@ -240,11 +240,11 @@ Category mensCategory = Category(title: 'sallon', selections: [
   'tabel',
   'antray',
 ]);
-Category womensCategory = Category(title: 'bad room', selections: [
+Category womensCategory = Category(title: 'bed room', selections: [
   'Shirts',
   'Jeans',
 ]);
-Category petsCategory = Category(title: 'leave room ', selections: [
+Category petsCategory = Category(title: 'live room ', selections: [
   'Toys',
   'Treats',
 ]);

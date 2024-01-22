@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import '../../../constants/app_colors.dart';
+import '../../../core/function/push_screen.dart';
+import '../../home/screens/home.dart';
 import '../widgets/custom_appbar.dart';
 import '../../../core/component/custom_body_bacground.dart';
 import '../../../core/component/custom_botton.dart';
@@ -111,7 +113,9 @@ class _MyHomePageState extends State<LoginPage> {
                     CustomBottom(
                       screenHight: screenHight,
                       text: 'Login',
-                      onTap: () {},
+                      onTap: () {
+                        pushScreen(context: context, screen: HomePage());
+                      },
                     ),
                     SizedBox(
                       height: screenHight * 0.09,

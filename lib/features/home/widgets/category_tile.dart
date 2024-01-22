@@ -5,6 +5,8 @@ import 'package:ar_shopping/features/home/screens/category_screen.dart';
 import 'package:ar_shopping/features/home/widgets/cart_appbar_action.dart';
 import 'package:ar_shopping/features/home/widgets/product_row.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 import '../../../constants/app_colors.dart';
 

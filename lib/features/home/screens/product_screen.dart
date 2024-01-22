@@ -318,7 +318,7 @@ class ModelViewButtom extends StatelessWidget {
       child: GestureDetector(
         onTap: onTap,
         child: CustomOutline(
-          strokeWidth: 3,
+          strokeWidth: 5,
           radius: 8,
           gradient: const LinearGradient(
             begin: Alignment.topLeft,
@@ -332,7 +332,9 @@ class ModelViewButtom extends StatelessWidget {
           height: 50,
           padding: const EdgeInsets.all(3),
           child: Container(
+            width: 120,
             decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(8),
               color: indexButtom == selectedModel
                   ? Theme.of(context).colorScheme.secondary
                   : null,

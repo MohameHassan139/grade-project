@@ -43,14 +43,14 @@ List<NewsItem> news = [
     category: 'bedroom',
     id: 1,
     imgUrl: imgList[0],
-    title: 'fake news by me',
+    title: 'new product and have spacial offer',
   ),
   NewsItem(
     author: 'mohamed hassa',
     category: 'salon',
     id: 1,
     imgUrl: imgList[1],
-    title: 'fake news by me',
+    title: 'new product and have spacial offer',
   ),
   NewsItem(
     author: 'mohamed hassa',
@@ -58,28 +58,28 @@ List<NewsItem> news = [
     id: 1,
     imgUrl: imgList[2],
     title:
-        'fake news by me and long text to test over full .............. webview_flutter _wkwebview  2.9.5 (3.9.1 available)',
+        'new product and long text to test over full .............. webview_flutter _wkwebview  2.9.5 (3.9.1 available)',
   ),
   NewsItem(
     author: 'mohamed hassa',
     category: 'live room',
     id: 1,
     imgUrl: imgList[3],
-    title: 'fake news by me',
+    title: 'new product and have spacial offer',
   ),
   NewsItem(
     author: 'mohamed hassa',
     category: 'live room',
     id: 1,
     imgUrl: imgList[4],
-    title: 'fake news by me',
+    title: 'new product and have spacial offer',
   ),
   NewsItem(
     author: 'CNNA',
     category: 'salon',
     id: 1,
     imgUrl: imgList[5],
-    title: 'fake news by me',
+    title: 'new product and have spacial offer',
   ),
 ];
 
