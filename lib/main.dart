@@ -1,7 +1,8 @@
-import 'package:ar_shopping/features/home/screens/home.dart';
+import 'package:ar_shopping/constants/app_colors.dart';
+import 'package:ar_shopping/features/home/presentation/views/screens/home.dart';
 import 'package:flutter/material.dart';
-import 'features/auth/screens/login_page.dart';
-import 'features/auth/screens/register.dart';
+import 'features/auth/presentation/view/screens/login_page.dart';
+import 'features/auth/presentation/view/screens/register.dart';
 
 void main() {
   runApp(const MyApp());
@@ -15,9 +16,10 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Flutter Demo',
-      theme: ThemeData(
+      theme: ThemeData.dark().copyWith(
+        primaryColor: CustomColors.kPinkColor,
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-        useMaterial3: true,
+        scaffoldBackgroundColor: CustomColors.kBlackColor,
       ),
       debugShowCheckedModeBanner: false,
       home: const LoginPage(),
