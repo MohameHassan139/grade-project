@@ -92,9 +92,7 @@ flutter:
   # example:
   assets:
     - assets/
-    - assets/mask/
-    - assets/movie-posters/
-    - assets/svg/
+    - assets/images/
 
   # fonts:
   #   - family: Schyler
