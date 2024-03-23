@@ -1,5 +1,6 @@
 import 'package:ar_shopping/constants/app_colors.dart';
 import 'package:ar_shopping/features/home/presentation/views/screens/home.dart';
+import 'package:ar_shopping/features/payment/presentation/views/payment_select_view.dart';
 import 'package:flutter/material.dart';
 import 'features/auth/presentation/view/screens/login_page.dart';
 import 'features/auth/presentation/view/screens/register.dart';
@@ -22,7 +23,7 @@ class MyApp extends StatelessWidget {
         scaffoldBackgroundColor: CustomColors.kBlackColor,
       ),
       debugShowCheckedModeBanner: false,
-      home: const LoginPage(),
+      home: const PaySelectView(),
     );
   }
 }

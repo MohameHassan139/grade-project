@@ -4,7 +4,7 @@ class DioConfig {
   static Dio getDio() {
     Dio dio = Dio(
       BaseOptions(
-        baseUrl: 'https://www.googleapis.com/books/v1/',
+        baseUrl: 'https://accept.paymob.com/api/',
       ),
     );
     dio.interceptors.add(LogInterceptor(responseBody: true));

@@ -7,8 +7,8 @@ abstract class AppRouter {
   static final router = GoRouter(
     routes: [
       // customGoRoute(
-      //   name: AppRoutNamed.SearchView,
-      //   path: AppRoutNamed.SearchView,
+      //   name: AppRoutNamed.paySelectView,
+      //   path: AppRoutNamed.paySelectView,
       //   child: BlocProvider<FetchSearchBooksCubit>(
       //     create: (context) => FetchSearchBooksCubit(
       //       searchRepo: getIt.get<SearchRepoImpl>(),
@@ -55,4 +55,5 @@ class AppRoutNamed {
   static const String homeView = '/homeView';
   static const String bookDetails = '/bookDetails';
   static const String SearchView = '/SearchView';
+  static const String paySelectView = '/paySelectView';
 }

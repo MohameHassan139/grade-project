@@ -1,6 +1,6 @@
 import 'package:get_it/get_it.dart';
 
-import '../../features/auth/data/repo/home_repo_impl.dart';
+import '../../features/auth/data/repo/auth_repo_impl.dart';
 
 final getIt = GetIt.instance;
 

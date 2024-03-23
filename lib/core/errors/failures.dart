@@ -26,7 +26,7 @@ class ServerFailuer extends Failuer {
         }
       case DioExceptionType.badCertificate:
         {
-          return ServerFailuer(errorMessage: ' Please Re-login  ');
+          return ServerFailuer(errorMessage: ' Please Re-login');
         }
       case DioExceptionType.badResponse:
         {
