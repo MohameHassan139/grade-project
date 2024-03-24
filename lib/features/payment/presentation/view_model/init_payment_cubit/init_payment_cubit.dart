@@ -1,8 +1,10 @@
 import 'package:ar_shopping/features/payment/data/repo/payment_repos.dart';
 import 'package:ar_shopping/features/payment/payment_constant.dart';
 import 'package:bloc/bloc.dart';
+import 'package:flutter/material.dart';
 import 'package:meta/meta.dart';
 
+import '../../../../../core/function/push_screen.dart';
 import '../../../data/models/key_request_model/key_request_model.dart';
 import '../../../data/models/order_request_model/order_request_model.dart';
 import '../../../data/models/order_response_model/order_response_model.dart';
@@ -58,6 +60,7 @@ class InitPaymentCubit extends Cubit<InitPaymentState> {
     token.fold((payment_key) {
       emit(PaymentKeySuccess(payment_key: payment_key));
       PaymentConstant.finalToken = payment_key;
+      
       print(payment_key);
     }, (error) {
       emit(PaymentkeyFailure(error: error.errorMessage));
