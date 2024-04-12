@@ -42,3 +42,32 @@ final class PaymentKeySuccess extends InitPaymentState {
     required this.payment_key,
   });
 }
+
+final class PaymentKioskLoading extends InitPaymentState {}
+
+final class PaymentKioskFailure extends InitPaymentState {
+  final String error;
+  PaymentKioskFailure({required this.error});
+}
+
+final class PaymentKioskSuccess extends InitPaymentState {
+  final KioskModel kioskModel;
+  PaymentKioskSuccess({
+    required this.kioskModel,
+  });
+}
+
+
+final class PaymentMobileWalletLoading extends InitPaymentState {}
+
+final class PaymentMobileWalletFailure extends InitPaymentState {
+  final String error;
+  PaymentMobileWalletFailure({required this.error});
+}
+
+final class PaymentMobileWalletSuccess extends InitPaymentState {
+  final MobileWallet mobileWallet;
+  PaymentMobileWalletSuccess({
+    required this.mobileWallet,
+  });
+}

@@ -25,38 +25,49 @@ import 'package:webview_flutter_android/webview_flutter_android.dart';
 import 'package:webview_flutter_wkwebview/webview_flutter_wkwebview.dart';
 
 // #enddocregion platform_imports
-class CreditCardView extends StatelessWidget {
-  const CreditCardView({
+class MobileWalletView extends StatelessWidget {
+  const MobileWalletView({
     super.key,
   });
 
   @override
   Widget build(BuildContext context) {
+    var cubit = BlocProvider.of<InitPaymentCubit>(context);
+
     var height = MediaQuery.of(context).size.height;
     var width = MediaQuery.of(context).size.width;
     return Scaffold(
       appBar: AppBar(
-        title: const Text('CreditCard pay'),
+        title: const Text('Mobile Wallet pay'),
       ),
       body: CustomBody(
           bodyHeight: height,
           bodyWidth: width,
           child: Center(
-            child: BlocBuilder<InitPaymentCubit, InitPaymentState>(
-                builder: (context, state) {
-              print(state);
+            child: BlocConsumer<InitPaymentCubit, InitPaymentState>(
+                listener: (context, state) {
               if (state is PaymentKeySuccess) {
-                // _controller = createWebViewController(
-                //   'https://accept.paymobsolutions.com/api/acceptance/iframes/${PaymentConstant.Iframe}?payment_token=${PaymentConstant.finalToken}',
-                // );
+                cubit.getMobileWallet(finalToken: state.payment_key);
+              }
+              if (state is PaymentMobileWalletSuccess) {
+                print('@@@@@@@@@@@state.mobileWallet.redirectUrl');
+
+                print(state.mobileWallet.redirectUrl);
+                print(state.mobileWallet.createdAt);
+              }
+            }, builder: (context, state) {
+              print(state);
+
+              if (state is PaymentMobileWalletSuccess) {
                 return WebViewWidget(
                   controller: createWebViewController(
-                    URL:
-                        'https://accept.paymobsolutions.com/api/acceptance/iframes/${PaymentConstant.Iframe}?payment_token=${state.payment_key}',
+                    URL: state.mobileWallet.iframeRedirectionUrl!,
                     context: context,
                   ),
                 );
               } else if (state is PaymentkeyFailure) {
+                return Text(state.error);
+              } else if (state is PaymentMobileWalletFailure) {
                 return Text(state.error);
               } else {
                 return const CircularProgressIndicator();
@@ -187,7 +198,7 @@ Page resource error:
           );
         },
       )
-      ..loadRequest(Uri.parse('$URL'));
+      ..loadRequest(Uri.parse('${URL}'));
 
     // #docregion platform_features
     if (controller.platform is AndroidWebViewController) {

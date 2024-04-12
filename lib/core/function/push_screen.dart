@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
-void pushScreen({required BuildContext context, required Widget screen}) {
+Future<void> pushScreen(
+    {required BuildContext context, required Widget screen}) async {
   ThemeData themeData = Theme.of(context);
   Navigator.push(
     context,

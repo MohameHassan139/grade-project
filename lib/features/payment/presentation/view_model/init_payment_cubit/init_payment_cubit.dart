@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:ar_shopping/features/payment/data/repo/payment_repos.dart';
 import 'package:ar_shopping/features/payment/payment_constant.dart';
 import 'package:bloc/bloc.dart';
@@ -6,6 +8,8 @@ import 'package:meta/meta.dart';
 
 import '../../../../../core/function/push_screen.dart';
 import '../../../data/models/key_request_model/key_request_model.dart';
+import '../../../data/models/kiosk/kiosk_model.dart';
+import '../../../data/models/mobile_wallet/mobile_wallet.dart';
 import '../../../data/models/order_request_model/order_request_model.dart';
 import '../../../data/models/order_response_model/order_response_model.dart';
 
@@ -15,13 +19,14 @@ class InitPaymentCubit extends Cubit<InitPaymentState> {
   InitPaymentCubit({required this.paymentRepo}) : super(InitPaymentInitial());
   final PaymentRepo paymentRepo;
 
+  bool isNavigate = false;
+
   Future<void> getAuthTokenPayment() async {
     emit(PaymentAuthtLoading());
     var token = await paymentRepo.authPayment();
     token.fold((token) async {
       emit(PaymentAuthSuccess(token: token));
-      print('@@@@@@@@@@@@@@@@@@@@@');
-      print(token);
+
       PaymentConstant.firstToken = token;
       print(PaymentConstant.firstToken);
     }, (error) {
@@ -49,8 +54,10 @@ class InitPaymentCubit extends Cubit<InitPaymentState> {
 
 // this line fore testing only and rmoved when ingrated with api
   final KeyRequestModel _keyRequestModel = KeyRequestModel.fromJson(keyData);
+
   Future<void> getFinalKey({required int intgrationId}) async {
     emit(PaymentKeyLoading());
+    isNavigate = true;
     _keyRequestModel.orderId = PaymentConstant.orederId;
     _keyRequestModel.authToken = PaymentConstant.firstToken;
     _keyRequestModel.integrationId = intgrationId;
@@ -60,13 +67,38 @@ class InitPaymentCubit extends Cubit<InitPaymentState> {
     token.fold((payment_key) {
       emit(PaymentKeySuccess(payment_key: payment_key));
       PaymentConstant.finalToken = payment_key;
-      
       print(payment_key);
     }, (error) {
       emit(PaymentkeyFailure(error: error.errorMessage));
     });
   }
+
+  Future<void> getRefCode({required String finalToken}) async {
+    emit(PaymentKioskLoading());
+
+    var response =
+        await paymentRepo.getRefCode(finalToken: PaymentConstant.finalToken);
+    response.fold((kioskModel) {
+      emit(PaymentKioskSuccess(kioskModel: kioskModel));
+    }, (error) {
+      emit(PaymentKioskFailure(error: error.errorMessage));
+    });
+  }
+
+  Future<void> getMobileWallet({required String finalToken}) async {
+    emit(PaymentMobileWalletLoading());
+
+    var response = await paymentRepo.getMobileWallet(
+        finalToken: PaymentConstant.finalToken);
+    response.fold((mobileWallet) {
+      emit(PaymentMobileWalletSuccess(mobileWallet: mobileWallet));
+    }, (error) {
+      emit(PaymentMobileWalletFailure(error: error.errorMessage));
+    });
+  }
 }
+
+Random random = Random();
 
 /// testing only
 Map<String, dynamic> orderData = {
@@ -74,7 +106,7 @@ Map<String, dynamic> orderData = {
   "delivery_needed": "false",
   "amount_cents": "10",
   "currency": "EGP",
-  "merchant_order_id": 929,
+  "merchant_order_id": random.nextInt(9999999),
   "items": [
     {
       "name": "AS8r9iyge",

@@ -1,5 +1,7 @@
 import 'package:ar_shopping/core/errors/failures.dart';
 import 'package:ar_shopping/features/payment/data/models/key_request_model/key_request_model.dart';
+import 'package:ar_shopping/features/payment/data/models/kiosk/kiosk_model.dart';
+import 'package:ar_shopping/features/payment/data/models/mobile_wallet/mobile_wallet.dart';
 import 'package:ar_shopping/features/payment/data/models/order_request_model/order_request_model.dart';
 import 'package:ar_shopping/features/payment/data/models/order_response_model/order_response_model.dart';
 import 'package:ar_shopping/features/payment/data/repo/payment_repos.dart';
@@ -59,6 +61,42 @@ class PaymentRepoImpl implements PaymentRepo {
       );
 
       return left(orderResponseModel);
+    } catch (e) {
+      if (e is DioException) {
+        return right(ServerFailuer.fromDioError(dioException: e));
+      }
+      return right(ServerFailuer(errorMessage: e.toString()));
+    }
+  }
+
+  @override
+  Future<Either<KioskModel, Failuer>> getRefCode(
+      {required String finalToken}) async {
+    try {
+      KioskModel _kioskModel = await paymentService.getRefCode(
+        quray: PaymentConstant.getRefCode,
+        finalToken: finalToken,
+      );
+
+      return left(_kioskModel);
+    } catch (e) {
+      if (e is DioException) {
+        return right(ServerFailuer.fromDioError(dioException: e));
+      }
+      return right(ServerFailuer(errorMessage: e.toString()));
+    }
+  }
+
+  @override
+  Future<Either<MobileWallet, Failuer>> getMobileWallet(
+      {required String finalToken}) async {
+    try {
+      MobileWallet _mobileWallet = await paymentService.getMobileWallet(
+        quray: PaymentConstant.getRefCode,
+        finalToken: finalToken,
+      );
+
+      return left(_mobileWallet);
     } catch (e) {
       if (e is DioException) {
         return right(ServerFailuer.fromDioError(dioException: e));
