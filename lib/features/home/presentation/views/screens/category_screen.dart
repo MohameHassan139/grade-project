@@ -1,8 +1,8 @@
 import 'package:ar_shopping/core/component/custom_body_bacground.dart';
 import 'package:ar_shopping/features/home/data/models/category.dart';
 import 'package:ar_shopping/features/home/data/models/product.dart';
-import 'package:ar_shopping/features/home/presentation/views/widgets/cart_appbar_action.dart';
-import 'package:ar_shopping/features/home/presentation/views/widgets/product_row.dart';
+import 'package:ar_shopping/features/card/presentation/view/widget/cart_appbar_action.dart';
+import 'package:ar_shopping/features/card/presentation/view/widget/product_row.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../../constants/app_colors.dart';

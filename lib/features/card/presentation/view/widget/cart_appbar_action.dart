@@ -1,7 +1,7 @@
-import 'package:ar_shopping/features/home/data/models/order_item.dart';
-import 'package:ar_shopping/features/home/presentation/views/widgets/cart_list.dart';
-import 'package:ar_shopping/features/home/presentation/views/screens/screen_cart.dart';
+import 'package:ar_shopping/features/card/presentation/view/screen_cart.dart';
 import 'package:flutter/material.dart';
+
+import 'cart_list.dart';
 
 class CartAppBarAction extends StatefulWidget {
   const CartAppBarAction({Key? key}) : super(key: key);
@@ -31,8 +31,10 @@ class _CartAppBarActionState extends State<CartAppBarAction> {
 
   @override
   Widget build(BuildContext context) {
-    return IconButton(
-      icon: Stack(
+    return Container(
+      height: 30,
+      width: 30,
+      child: Stack(
         alignment: Alignment.center,
         children: [
           const Icon(
@@ -70,10 +72,12 @@ class _CartAppBarActionState extends State<CartAppBarAction> {
             ),
         ],
       ),
-      onPressed: () => _pushScreen(
-        context: context,
-        screen: const CartScreen(),
-      ),
+      // onPressed: () {
+      //   // _pushScreen(
+      //   // context: context,
+      //   // screen: const CartScreen(),
+      //   // );
+      // },
     );
   }
 }

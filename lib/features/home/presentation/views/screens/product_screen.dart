@@ -1,21 +1,17 @@
 import 'package:ar_shopping/constants/app_colors.dart';
 import 'package:ar_shopping/core/component/custom_body_bacground.dart';
 import 'package:ar_shopping/core/component/custom_botton.dart';
-import 'package:ar_shopping/features/home/data/models/feedback_model.dart';
-import 'package:ar_shopping/features/home/data/models/order_item.dart';
 import 'package:ar_shopping/features/home/data/models/product.dart';
-import 'package:ar_shopping/features/home/presentation/views/widgets/cart_appbar_action.dart';
-import 'package:ar_shopping/features/home/presentation/views/widgets/cart_list.dart';
-import 'package:ar_shopping/features/home/presentation/views/widgets/category_tile.dart';
+import 'package:ar_shopping/features/card/presentation/view/widget/cart_appbar_action.dart';
 import 'package:ar_shopping/features/home/presentation/views/widgets/custom_appbar.dart';
 import 'package:ar_shopping/features/home/presentation/views/widgets/feedback_list.dart';
 import 'package:ar_shopping/features/home/presentation/views/widgets/model_viewer.dart';
 import 'package:ar_shopping/features/home/presentation/views/widgets/rate_stare.dart';
 import 'package:flutter/material.dart';
-// import 'package:model_viewer_plus/model_viewer_plus.dart';
-
 import '../../../../../core/component/custom_outline.dart';
-import '../widgets/feedback_widget.dart';
+import '../../../../card/data/models/order_item.dart';
+import '../../../../card/presentation/view/widget/cart_list.dart';
+import '../widgets/model_view_bottom.dart';
 
 class ProductScreen extends StatefulWidget {
   const ProductScreen({required this.product, Key? key}) : super(key: key);
@@ -293,67 +289,6 @@ class _ProductScreenState extends State<ProductScreen> {
                 ),
               ),
             ],
-          ),
-        ),
-      ),
-    );
-  }
-}
-
-class ModelViewButtom extends StatelessWidget {
-  VoidCallback? onTap;
-  String text;
-  int selectedModel;
-  int indexButtom;
-  ModelViewButtom(
-      {required VoidCallback this.onTap,
-      required this.text,
-      required this.selectedModel,
-      required this.indexButtom});
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 8.0),
-      child: GestureDetector(
-        onTap: onTap,
-        child: CustomOutline(
-          strokeWidth: 5,
-          radius: 8,
-          gradient: const LinearGradient(
-            begin: Alignment.topLeft,
-            end: Alignment.bottomRight,
-            colors: [
-              CustomColors.kPinkColor,
-              CustomColors.kGreenColor,
-            ],
-          ),
-          width: 120,
-          height: 50,
-          padding: const EdgeInsets.all(3),
-          child: Container(
-            width: 120,
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(8),
-              color: indexButtom == selectedModel
-                  ? Theme.of(context).colorScheme.secondary
-                  : null,
-              border: Border.all(
-                color: Colors.grey[350]!,
-                width: 1.25,
-              ),
-              // borderRadius: BorderRadius.circular(8),
-            ),
-            child: Center(
-              child: Text(
-                text,
-                style: Theme.of(context).textTheme.bodySmall!.copyWith(
-                      color: indexButtom == selectedModel
-                          ? Colors.white
-                          : Colors.grey[350],
-                    ),
-              ),
-            ),
           ),
         ),
       ),

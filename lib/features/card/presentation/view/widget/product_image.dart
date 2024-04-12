@@ -24,6 +24,7 @@ class ProductImage extends StatelessWidget {
         clipBehavior: Clip.hardEdge,
         child: Image.network(
           product.imageUrls.first,
+          fit: BoxFit.fill,
           loadingBuilder: (_, child, loadingProgress) => loadingProgress == null
               ? child
               : const Center(child: CircularProgressIndicator()),

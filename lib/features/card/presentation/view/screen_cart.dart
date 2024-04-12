@@ -1,9 +1,9 @@
 import 'package:ar_shopping/core/component/custom_body_bacground.dart';
 import 'package:ar_shopping/core/component/custom_botton.dart';
-import 'package:ar_shopping/features/home/presentation/views/widgets/cart_appbar_action.dart';
-import 'package:ar_shopping/features/home/presentation/views/widgets/cart_list.dart';
-import 'package:ar_shopping/features/home/presentation/views/widgets/product_image.dart';
+import 'package:ar_shopping/features/card/presentation/view/widget/cart_list.dart';
+import 'package:ar_shopping/features/card/presentation/view/widget/product_image.dart';
 import 'package:flutter/material.dart';
+import 'package:snappable_thanos/snappable_thanos.dart';
 
 class CartScreen extends StatefulWidget {
   const CartScreen({Key? key}) : super(key: key);
@@ -27,50 +27,58 @@ class _CartScreenState extends State<CartScreen> {
   }
 
   void updateState() => setState(() {});
-
+  bool snapOntapValue = false;
   @override
   Widget build(BuildContext context) {
     final screenHight = MediaQuery.of(context).size.height;
     final screenWidth = MediaQuery.of(context).size.width;
     List<Widget> orderItemRows = cart.itemsInCart
         .map(
-          (item) => Row(
-            children: [
-              SizedBox(
-                width: 125,
-                child: ProductImage(
-                  product: item.product,
+          (item) => Snappable(
+            snapOnTap: snapOntapValue,
+            onSnapped: () {},
+            child: Row(
+              children: [
+                SizedBox(
+                  width: 125,
+                  child: ProductImage(
+                    product: item.product,
+                  ),
                 ),
-              ),
-              const SizedBox(
-                width: 16,
-              ),
-              Expanded(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      item.product.name,
-                      style: Theme.of(context).textTheme.titleMedium,
-                    ),
-                    const SizedBox(
-                      height: 8,
-                    ),
-                    Text(
-                      '\$${item.product.cost}',
-                      style: Theme.of(context).textTheme.titleSmall!.copyWith(
-                            color: Theme.of(context).colorScheme.secondary,
-                          ),
-                    ),
-                  ],
+                const SizedBox(
+                  width: 16,
                 ),
-              ),
-              IconButton(
-                icon: const Icon(Icons.close),
-                onPressed: () => cart.remove(item),
-                color: Colors.red,
-              )
-            ],
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        item.product.name,
+                        style: Theme.of(context).textTheme.titleMedium,
+                      ),
+                      const SizedBox(
+                        height: 8,
+                      ),
+                      Text(
+                        '\$${item.product.cost}',
+                        style: Theme.of(context).textTheme.titleSmall!.copyWith(
+                              color: Theme.of(context).colorScheme.secondary,
+                            ),
+                      ),
+                    ],
+                  ),
+                ),
+                IconButton(
+                  icon: const Icon(Icons.close),
+                  onPressed: () {
+                    cart.remove(item);
+                    snapOntapValue = true;
+                    setState(() {});
+                  },
+                  color: Colors.red,
+                )
+              ],
+            ),
           ),
         )
         .toList();

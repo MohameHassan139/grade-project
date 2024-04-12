@@ -2,7 +2,7 @@ import 'package:ar_shopping/constants/app_colors.dart';
 import 'package:ar_shopping/core/function/push_screen.dart';
 import 'package:ar_shopping/features/home/data/models/product.dart';
 import 'package:ar_shopping/features/home/presentation/views/screens/product_screen.dart';
-import 'package:ar_shopping/features/home/presentation/views/widgets/product_image.dart';
+import 'package:ar_shopping/features/card/presentation/view/widget/product_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 

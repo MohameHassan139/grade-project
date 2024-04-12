@@ -1,5 +1,6 @@
-import 'package:ar_shopping/features/home/data/models/order_item.dart';
 import 'package:flutter/material.dart';
+
+import '../../../data/models/order_item.dart';
 
 class Cart with ChangeNotifier {
   List<OrderItem> itemsInCart = [];

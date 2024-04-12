@@ -1,6 +1,6 @@
 import 'package:ar_shopping/constants/app_colors.dart';
 import 'package:ar_shopping/features/home/data/models/product.dart';
-import 'package:ar_shopping/features/home/presentation/views/widgets/product_tile.dart';
+import 'package:ar_shopping/features/card/presentation/view/widget/product_tile.dart';
 
 import 'package:flutter/material.dart';
 
