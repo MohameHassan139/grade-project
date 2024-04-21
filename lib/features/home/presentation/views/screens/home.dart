@@ -6,7 +6,7 @@ import '../../../../../constants/app_colors.dart';
 import '../../../../../core/component/custom_body_bacground.dart';
 import '../../../data/models/news_item.dart';
 import '../widgets/carousle_silder.dart';
-import '../widgets/custom_appbar.dart';
+import '../../../../../core/component/custom_appbar.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({

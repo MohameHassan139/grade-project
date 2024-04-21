@@ -8,6 +8,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 // Import for Android features.
 import 'package:webview_flutter_android/webview_flutter_android.dart';
+import '../../../../core/component/custom_appbar.dart';
 import '../../../../core/component/custom_body_bacground.dart';
 import '../../payment_constant.dart';
 import 'dart:async';
@@ -35,8 +36,8 @@ class CreditCardView extends StatelessWidget {
     var height = MediaQuery.of(context).size.height;
     var width = MediaQuery.of(context).size.width;
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('CreditCard pay'),
+      appBar: CustomAppbar(
+        title: 'CreditCard pay',
       ),
       body: CustomBody(
           bodyHeight: height,

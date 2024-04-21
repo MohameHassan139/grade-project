@@ -2,7 +2,7 @@ import 'package:ar_shopping/constants/app_colors.dart';
 import 'package:flutter/material.dart';
 
 class CustomAppbar extends StatelessWidget implements PreferredSizeWidget {
-  final String title;
+  final title;
   List<Widget>? actions;
 
   CustomAppbar({required this.title, this.actions});
@@ -13,7 +13,7 @@ class CustomAppbar extends StatelessWidget implements PreferredSizeWidget {
   @override
   Widget build(BuildContext context) {
     return AppBar(
-      backgroundColor: CustomColors.kBlackColor,
+      // backgroundColor: CustomColors.kBlackColor,
       title: Text(title),
       centerTitle: true,
       actions: actions,

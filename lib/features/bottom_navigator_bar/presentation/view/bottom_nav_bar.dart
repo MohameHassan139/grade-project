@@ -31,10 +31,10 @@ class BottomNavBarView extends StatelessWidget {
             index: cubit.navigatorValue,
             height: 60.0,
             items: <Widget>[
-              const Icon(Icons.add, size: 30),
+              const Icon(Icons.search, size: 30),
               const CartAppBarAction(),
               const Text(''),
-              const Icon(Icons.call_split, size: 30),
+              const Icon(Icons.notifications_active_rounded, size: 30),
               const Icon(Icons.perm_identity, size: 30),
             ],
             color: CustomColors.kCyanColor,

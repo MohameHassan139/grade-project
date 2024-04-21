@@ -4,6 +4,11 @@ import 'package:ar_shopping/features/card/presentation/view/widget/cart_list.dar
 import 'package:ar_shopping/features/card/presentation/view/widget/product_image.dart';
 import 'package:flutter/material.dart';
 import 'package:snappable_thanos/snappable_thanos.dart';
+import 'dart:ui';
+
+import '../../../../constants/app_colors.dart';
+import '../../../../core/function/push_screen.dart';
+import '../../../payment/presentation/views/payment_select_view.dart';
 
 class CartScreen extends StatefulWidget {
   const CartScreen({Key? key}) : super(key: key);
@@ -32,62 +37,82 @@ class _CartScreenState extends State<CartScreen> {
   Widget build(BuildContext context) {
     final screenHight = MediaQuery.of(context).size.height;
     final screenWidth = MediaQuery.of(context).size.width;
-    List<Widget> orderItemRows = cart.itemsInCart
-        .map(
-          (item) => Snappable(
-            snapOnTap: snapOntapValue,
-            onSnapped: () {},
-            child: Row(
-              children: [
-                SizedBox(
-                  width: 125,
-                  child: ProductImage(
-                    product: item.product,
-                  ),
+
+    List<Widget> orderItemRows = cart.itemsInCart.map(
+      (item) {
+        return Snappable(
+          key: item.snappableKey,
+          snapOnTap: true,
+          onSnapped: () {
+            print("Snapped!");
+            cart.remove(item);
+          },
+          child: Row(
+            children: [
+              SizedBox(
+                width: 125,
+                child: ProductImage(
+                  product: item.product,
                 ),
-                const SizedBox(
-                  width: 16,
+              ),
+              const SizedBox(
+                width: 16,
+              ),
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      item.product.name,
+                      style: Theme.of(context).textTheme.titleMedium,
+                    ),
+                    const SizedBox(
+                      height: 8,
+                    ),
+                    Text(
+                      '\$${item.product.cost}',
+                      style: Theme.of(context).textTheme.titleSmall!.copyWith(
+                            color: Theme.of(context).colorScheme.secondary,
+                          ),
+                    ),
+                  ],
                 ),
-                Expanded(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        item.product.name,
-                        style: Theme.of(context).textTheme.titleMedium,
-                      ),
-                      const SizedBox(
-                        height: 8,
-                      ),
-                      Text(
-                        '\$${item.product.cost}',
-                        style: Theme.of(context).textTheme.titleSmall!.copyWith(
-                              color: Theme.of(context).colorScheme.secondary,
-                            ),
-                      ),
-                    ],
-                  ),
-                ),
-                IconButton(
-                  icon: const Icon(Icons.close),
-                  onPressed: () {
-                    cart.remove(item);
-                    snapOntapValue = true;
-                    setState(() {});
-                  },
-                  color: Colors.red,
-                )
-              ],
-            ),
+              ),
+              IconButton(
+                icon: const Icon(Icons.close),
+                onPressed: () {
+                  item.snappableKey.currentState?.activate();
+                  SnappableState state = item.snappableKey.currentState!;
+                  if (item.snappableKey.currentState!.isInProgress) {
+                    // do nothing
+                    debugPrint("Animation is in progress, please wait!");
+                  } else if (item.snappableKey.currentState!.isGone) {
+                    state.reset();
+                  } else {
+                    state.snap();
+                  }
+                },
+                color: Colors.red,
+              )
+            ],
           ),
-        )
-        .toList();
+        );
+      },
+    ).toList();
 
     return Scaffold(
       appBar: AppBar(
-        leading: IconButton(
-          icon: const Icon(Icons.close),
-          onPressed: () => Navigator.pop(context),
+        flexibleSpace: Container(
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+              colors: [
+                CustomColors.kPinkColor.withOpacity(0.7),
+                CustomColors.kCyanColor.withOpacity(0.7),
+              ], // Replace with your desired gradient colors
+              begin: Alignment.topLeft,
+              end: Alignment.bottomRight,
+            ),
+          ),
         ),
         centerTitle: true,
         title: Column(
@@ -145,7 +170,9 @@ class _CartScreenState extends State<CartScreen> {
                     ],
                   ),
                   CustomBottom(
-                    onTap: () {},
+                    onTap: () {
+                      pushScreen(context: context, screen: PaySelectView());
+                    },
                     text: 'Check Out',
                     screenHight: screenHight,
                   ),

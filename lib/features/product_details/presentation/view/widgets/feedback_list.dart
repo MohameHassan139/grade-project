@@ -1,7 +1,7 @@
-import 'package:ar_shopping/features/home/presentation/views/widgets/feedback_widget.dart';
+import 'package:ar_shopping/features/product_details/presentation/view/widgets/feedback_widget.dart';
 import 'package:flutter/material.dart';
 
-import '../../../data/models/feedback_model.dart';
+import '../../../../home/data/models/feedback_model.dart';
 
 class FeedbackList extends StatelessWidget {
   // Replace this list with your actual list of feedback data

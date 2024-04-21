@@ -5,16 +5,17 @@ import 'package:flutter/material.dart';
 import '../../constants/app_colors.dart';
 
 class CustomBody extends StatelessWidget {
-  final double bodyHeight;
-  final double bodyWidth;
+  final double? bodyHeight;
+  final double? bodyWidth;
   Widget child;
-  CustomBody(
-      {required this.bodyHeight, required this.bodyWidth, required this.child});
+  CustomBody({this.bodyHeight, this.bodyWidth, required this.child});
   @override
   Widget build(BuildContext context) {
+    final screenHight = MediaQuery.of(context).size.height;
+    final screenWidth = MediaQuery.of(context).size.width;
     return SizedBox(
-      height: bodyHeight,
-      width: bodyWidth,
+      height: bodyHeight ?? screenHight,
+      width: bodyWidth ?? screenWidth,
       child: Stack(
         children: [
           Positioned(

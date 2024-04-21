@@ -6,7 +6,7 @@ import 'package:ar_shopping/features/card/presentation/view/widget/product_row.d
 import 'package:flutter/material.dart';
 
 import '../../../../../constants/app_colors.dart';
-import '../widgets/custom_appbar.dart';
+import '../../../../../core/component/custom_appbar.dart';
 
 class CategoryScreen extends StatefulWidget {
   const CategoryScreen({required this.category, Key? key}) : super(key: key);

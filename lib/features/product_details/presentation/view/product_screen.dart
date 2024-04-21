@@ -3,15 +3,15 @@ import 'package:ar_shopping/core/component/custom_body_bacground.dart';
 import 'package:ar_shopping/core/component/custom_botton.dart';
 import 'package:ar_shopping/features/home/data/models/product.dart';
 import 'package:ar_shopping/features/card/presentation/view/widget/cart_appbar_action.dart';
-import 'package:ar_shopping/features/home/presentation/views/widgets/custom_appbar.dart';
-import 'package:ar_shopping/features/home/presentation/views/widgets/feedback_list.dart';
-import 'package:ar_shopping/features/home/presentation/views/widgets/model_viewer.dart';
-import 'package:ar_shopping/features/home/presentation/views/widgets/rate_stare.dart';
+import 'package:ar_shopping/core/component/custom_appbar.dart';
+import 'package:ar_shopping/features/product_details/presentation/view/widgets/feedback_list.dart';
+import 'package:ar_shopping/features/product_details/presentation/view/widgets/model_viewer.dart';
+import 'package:ar_shopping/features/product_details/presentation/view/widgets/rate_stare.dart';
 import 'package:flutter/material.dart';
-import '../../../../../core/component/custom_outline.dart';
-import '../../../../card/data/models/order_item.dart';
-import '../../../../card/presentation/view/widget/cart_list.dart';
-import '../widgets/model_view_bottom.dart';
+import '../../../../core/component/custom_outline.dart';
+import '../../../card/data/models/order_item.dart';
+import '../../../card/presentation/view/widget/cart_list.dart';
+import 'widgets/model_view_bottom.dart';
 
 class ProductScreen extends StatefulWidget {
   const ProductScreen({required this.product, Key? key}) : super(key: key);

@@ -4,6 +4,7 @@ import 'package:ar_shopping/features/payment/payment_constant.dart';
 import 'package:ar_shopping/features/payment/presentation/view_model/init_payment_cubit/init_payment_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import '../../../../core/component/custom_appbar.dart';
 import '../../../../core/component/custom_body_bacground.dart';
 import '../../../../core/function/push_screen.dart';
 import '../../../../core/utils/assets.dart';
@@ -23,6 +24,9 @@ class PaySelectView extends StatelessWidget {
     var cubit = BlocProvider.of<InitPaymentCubit>(context);
     cubit.getAuthTokenPayment();
     return Scaffold(
+      appBar: CustomAppbar(
+        title: 'pay',
+      ),
       body: CustomBody(
         bodyHeight: height,
         bodyWidth: width,
