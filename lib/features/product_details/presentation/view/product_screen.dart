@@ -8,6 +8,7 @@ import 'package:ar_shopping/features/product_details/presentation/view/widgets/f
 import 'package:ar_shopping/features/product_details/presentation/view/widgets/model_viewer.dart';
 import 'package:ar_shopping/features/product_details/presentation/view/widgets/rate_stare.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import '../../../../core/component/custom_outline.dart';
 import '../../../card/data/models/order_item.dart';
 import '../../../card/presentation/view/widget/cart_list.dart';
@@ -81,7 +82,7 @@ class _ProductScreenState extends State<ProductScreen> {
     List<Widget> sizeSelectionWidgets = product.sizes
             ?.map(
               (s) => Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                padding: const EdgeInsets.all(4.0),
                 child: GestureDetector(
                   onTap: () {
                     setSelectedSize(s);
@@ -124,8 +125,8 @@ class _ProductScreenState extends State<ProductScreen> {
               child: Image.network(
                 selectedImageUrl!,
                 fit: BoxFit.fill,
-                color: CustomColors.kGreyBackground,
-                colorBlendMode: BlendMode.multiply,
+                // color: CustomColors.kGreyBackground,
+                // colorBlendMode: BlendMode.multiply,
               ),
             ),
             const SizedBox(height: 18),
@@ -192,7 +193,7 @@ class _ProductScreenState extends State<ProductScreen> {
                                 modeView = 2;
                               });
                             },
-                            text: '3d model view',
+                            text: '3d view',
                           ),
                           ModelViewButtom(
                             indexButtom: 3,
@@ -253,8 +254,11 @@ class _ProductScreenState extends State<ProductScreen> {
                               ?.copyWith(color: CustomColors.kGreenColor),
                         ),
                         const SizedBox(height: 8),
-                        Row(
-                          children: sizeSelectionWidgets,
+                        Center(
+                          child: Wrap(
+                            alignment: WrapAlignment.center,
+                            children: sizeSelectionWidgets,
+                          ),
                         ),
                       ],
                       const SizedBox(

@@ -22,7 +22,7 @@ class ProductTile extends StatelessWidget {
         );
       },
       child: SizedBox(
-        width: 180,
+        width: 120,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [

@@ -11,27 +11,26 @@ class FeedbackWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListTile(
+      contentPadding: EdgeInsets.all(0),
       leading: CircleAvatar(
         radius: 30,
         foregroundImage: NetworkImage('${feedback.image}'),
       ),
       title: Text(
         feedback.userName,
-        style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-            color: const Color.fromARGB(255, 218, 218, 227),
-            fontWeight: FontWeight.bold),
+        style: Theme.of(context)
+            .textTheme
+            .bodyMedium
+            ?.copyWith(fontWeight: FontWeight.bold),
       ),
       subtitle: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const SizedBox(height: 4),
+          const SizedBox(height: 2),
           ReadMoreText(
             feedback.comment,
             trimLines: 2,
-            style: Theme.of(context)
-                .textTheme
-                .bodyLarge
-                ?.copyWith(color: CustomColors.kWhiteColor),
+            style: Theme.of(context).textTheme.bodyMedium?.copyWith(),
             colorClickableText: CustomColors.kGreyColor,
             trimMode: TrimMode.Line,
             trimCollapsedText: ' Show more',

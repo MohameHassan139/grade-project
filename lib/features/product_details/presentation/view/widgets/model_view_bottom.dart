@@ -16,6 +16,7 @@ class ModelViewButtom extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var screenWidth = MediaQuery.of(context).size.width;
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 8.0),
       child: GestureDetector(
@@ -31,11 +32,11 @@ class ModelViewButtom extends StatelessWidget {
               CustomColors.kGreenColor,
             ],
           ),
-          width: 120,
+          width: screenWidth * .25,
           height: 50,
           padding: const EdgeInsets.all(3),
           child: Container(
-            width: 120,
+            width: screenWidth * .25,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(8),
               color: indexButtom == selectedModel

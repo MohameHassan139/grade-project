@@ -26,13 +26,11 @@ class InitPaymentCubit extends Cubit<InitPaymentState> {
     var token = await paymentRepo.authPayment();
     token.fold((token) async {
       emit(PaymentAuthSuccess(token: token));
-
       PaymentConstant.firstToken = token;
+      getOrder();
       print(PaymentConstant.firstToken);
     }, (error) {
       emit(PaymentAuthFailure(error: error.errorMessage));
-    })?.then((value) async {
-      await getOrder();
     });
   }
 
@@ -109,7 +107,7 @@ Map<String, dynamic> orderData = {
   "merchant_order_id": random.nextInt(9999999),
   "items": [
     {
-      "name": "AS8r9iyge",
+      "name": "moj",
       "amount_cents": "5000",
       "description": "Smart Watch",
       "quantity": "1"
@@ -122,10 +120,10 @@ Map<String, dynamic> orderData = {
     }
   ],
   "shipping_data": {
-    "apartment": "80",
-    "email": "mohamedhessan1@gmail.com",
+    "apartment": "800",
+    "email": "mohamedhesbsan1@gmail.com",
     "floor": "42",
-    "first_name": "Clifford",
+    "first_name": "moh",
     "street": "Ethan Land",
     "building": "80258",
     "phone_number": "+86(8)9135210487",
@@ -140,7 +138,7 @@ Map<String, dynamic> orderData = {
     "notes": " test",
     "number_of_packages": 1,
     "weight": 1,
-    "weight_unit": "Kilogram",
+    "weight_unit": "Kilognram",
     "length": 1,
     "width": 1,
     "height": 1,
@@ -155,9 +153,9 @@ Map<String, dynamic> keyData = {
   "order_id": "103",
   "billing_data": {
     "apartment": "803",
-    "email": "claudette09@exa.com",
+    "email": "mohamedhesbsan1@exa.com",
     "floor": "42",
-    "first_name": "Clifford",
+    "first_name": "moh",
     "street": "Ethan Land",
     "building": "8028",
     "phone_number": "+86(8)9135210487",

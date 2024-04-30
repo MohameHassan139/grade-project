@@ -25,9 +25,10 @@ class MyApp extends StatelessWidget {
     return MultiBlocProvider(
       providers: [
         BlocProvider<InitPaymentCubit>(
-          create: (context) =>
-              InitPaymentCubit(paymentRepo: getIt.get<PaymentRepoImpl>()),
-        ),
+            create: (context) =>
+                InitPaymentCubit(paymentRepo: getIt.get<PaymentRepoImpl>())
+            // ..getAuthTokenPayment(),
+            ),
         BlocProvider(
           create: (context) => BottomNavBarCubit(),
         ),

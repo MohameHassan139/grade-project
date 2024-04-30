@@ -56,29 +56,6 @@ class _CustomCarousleSliderState extends State<CustomCarousleSlider> {
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Padding(
-                                padding:
-                                    const EdgeInsets.symmetric(horizontal: 20),
-                                child: Row(
-                                  children: [
-                                    Text(
-                                      item.author,
-                                      style: TextStyle(color: Colors.white),
-                                    ),
-                                    Icon(
-                                      Icons.verified,
-                                      color: Theme.of(context).primaryColor,
-                                    ),
-                                    SizedBox(
-                                      width: 8,
-                                    ),
-                                    Text(
-                                      item.time,
-                                      style: TextStyle(color: Colors.white),
-                                    ),
-                                  ],
-                                ),
-                              ),
                               Container(
                                 width: double.infinity,
                                 decoration: const BoxDecoration(
@@ -98,7 +75,7 @@ class _CustomCarousleSliderState extends State<CustomCarousleSlider> {
                                   maxLines: 2,
                                   style: Theme.of(context)
                                       .textTheme
-                                      .titleLarge
+                                      .bodyMedium
                                       ?.copyWith(
                                         color: Colors.white,
                                       ),
@@ -112,49 +89,44 @@ class _CustomCarousleSliderState extends State<CustomCarousleSlider> {
               ),
             ))
         .toList();
-    return Container(
-      height: 300,
-      child: Column(children: [
-        Expanded(
-          child: CarouselSlider(
-            items: imageSliders,
-            carouselController: _controller,
-            options: CarouselOptions(
-                autoPlay: true,
-                enlargeCenterPage: true,
-                aspectRatio: 2.0,
-                onPageChanged: (index, reason) {
-                  setState(() {
-                    _current = index;
-                  });
-                }),
-          ),
-        ),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: news.asMap().entries.map((entry) {
-            return GestureDetector(
-              onTap: () => _controller.animateToPage(entry.key),
-              child: Container(
-                width: _current == entry.key ? 25.0 : 12,
-                height: 12.0,
-                margin:
-                    const EdgeInsets.symmetric(vertical: 8.0, horizontal: 4.0),
-                decoration: BoxDecoration(
-                    borderRadius:
-                        _current == entry.key ? BorderRadius.circular(8) : null,
-                    shape: _current == entry.key
-                        ? BoxShape.rectangle
-                        : BoxShape.circle,
-                    color: (Theme.of(context).brightness == Brightness.dark
-                            ? CustomColors.kGreenColor
-                            : CustomColors.kWhiteColor)
-                        .withOpacity(_current == entry.key ? 0.9 : 0.4)),
-              ),
-            );
-          }).toList(),
-        ),
-      ]),
-    );
+    return Column(children: [
+      CarouselSlider(
+        items: imageSliders,
+        carouselController: _controller,
+        options: CarouselOptions(
+            autoPlay: true,
+            enlargeCenterPage: true,
+            aspectRatio: 2.0,
+            onPageChanged: (index, reason) {
+              setState(() {
+                _current = index;
+              });
+            }),
+      ),
+      Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: news.asMap().entries.map((entry) {
+          return GestureDetector(
+            onTap: () => _controller.animateToPage(entry.key),
+            child: Container(
+              width: _current == entry.key ? 25.0 : 12,
+              height: 12.0,
+              margin:
+                  const EdgeInsets.symmetric(vertical: 8.0, horizontal: 4.0),
+              decoration: BoxDecoration(
+                  borderRadius:
+                      _current == entry.key ? BorderRadius.circular(8) : null,
+                  shape: _current == entry.key
+                      ? BoxShape.rectangle
+                      : BoxShape.circle,
+                  color: (Theme.of(context).brightness == Brightness.dark
+                          ? CustomColors.kGreenColor
+                          : CustomColors.kWhiteColor)
+                      .withOpacity(_current == entry.key ? 0.9 : 0.4)),
+            ),
+          );
+        }).toList(),
+      ),
+    ]);
   }
 }

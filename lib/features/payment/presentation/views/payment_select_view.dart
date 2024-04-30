@@ -14,15 +14,26 @@ import 'credit_card_view.dart';
 import 'mobile_wallet_view.dart';
 import 'ref_code_screen.dart';
 
-class PaySelectView extends StatelessWidget {
+class PaySelectView extends StatefulWidget {
   const PaySelectView({super.key});
+
+  @override
+  State<PaySelectView> createState() => _PaySelectViewState();
+}
+
+class _PaySelectViewState extends State<PaySelectView> {
+  @override
+  void initState() {
+    BlocProvider.of<InitPaymentCubit>(context).getAuthTokenPayment();
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
     var height = MediaQuery.of(context).size.height;
     var width = MediaQuery.of(context).size.width;
     var cubit = BlocProvider.of<InitPaymentCubit>(context);
-    cubit.getAuthTokenPayment();
+
     return Scaffold(
       appBar: CustomAppbar(
         title: 'pay',
@@ -68,10 +79,10 @@ class PaymentSelectSuccess extends StatelessWidget {
           children: [
             ElevatedButton(
               onPressed: () {
-                cubit.getFinalKey(
-                    intgrationId: PaymentConstant.intgrationCardId);
-                pushScreen(context: context, screen: CreditCardView())
+                cubit
+                    .getFinalKey(intgrationId: PaymentConstant.intgrationCardId)
                     .then((value) {});
+                pushScreen(context: context, screen: CreditCardView());
               },
               child: Row(
                 children: [
