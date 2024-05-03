@@ -108,19 +108,19 @@ Map<String, dynamic> orderData = {
   "items": [
     {
       "name": "moj",
-      "amount_cents": "5000",
+      "amount_cents": "10",
       "description": "Smart Watch",
       "quantity": "1"
     },
     {
       "name": "ERT6",
-      "amount_cents": "20000",
+      "amount_cents": "0",
       "description": "Power ank",
       "quantity": "1"
     }
   ],
   "shipping_data": {
-    "apartment": "800",
+    "apartment": "8",
     "email": "mohamedhesbsan1@gmail.com",
     "floor": "42",
     "first_name": "moh",
@@ -148,7 +148,7 @@ Map<String, dynamic> orderData = {
 
 Map<String, dynamic> keyData = {
   "auth_token": "ZXlKaGlPaUpJVXpVeE1pSX1Y0NJmV5Sn...",
-  "amount_cents": "100",
+  "amount_cents": "10",
   "expiration": 3600,
   "order_id": "103",
   "billing_data": {
@@ -167,6 +167,6 @@ Map<String, dynamic> keyData = {
     "state": "Utah"
   },
   "currency": "EGP",
-  "integration_id": 4544655,
+  "integration_id": 0,
   "lock_order_when_paid": "false"
 };

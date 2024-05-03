@@ -1,3 +1,4 @@
+import 'package:ar_shopping/AR_test/ar_test.dart';
 import 'package:ar_shopping/constants/app_colors.dart';
 import 'package:ar_shopping/features/home/presentation/views/screens/home.dart';
 import 'package:ar_shopping/features/payment/data/repo/payment_repo_impl.dart';
@@ -41,10 +42,11 @@ class MyApp extends StatelessWidget {
           scaffoldBackgroundColor: CustomColors.kBlackColor,
         ),
         debugShowCheckedModeBanner: false,
-        // home: const PaySelectView(),
-        home: BottomNavBarView(),
+        home: ARtest(),
+        // home: BottomNavBarView(),
       ),
     );
   }
 }
 // BottomNavBarCubitCubit
+// new branch
