@@ -5,7 +5,8 @@ import 'package:meta/meta.dart';
 import '../../../../card/presentation/view/screen_cart.dart';
 import '../../../../home/presentation/views/screens/home.dart';
 import '../../../../profile/profile.dart';
-import '../../../../search/search.dart';
+import '../../../../search/presentation/views/search_view.dart';
+
 
 part 'bottom_nav_bar_cubit_state.dart';
 
@@ -14,11 +15,12 @@ class BottomNavBarCubit extends Cubit<BottomNavBarCubitState> {
   late PageController pageController = PageController(initialPage: 0);
   int navigatorValue = 0;
   List<Widget> screens = [
-    HomePage(),
+    SearchView(),
     CartScreen(),
     HomePage(),
+    HomePage(),
     ProfileView(),
-    SreachView(),
+    
   ];
 
   void changeSelecteValue(int selectedValue) {
