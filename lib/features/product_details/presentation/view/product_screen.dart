@@ -1,6 +1,7 @@
 import 'package:ar_shopping/constants/app_colors.dart';
 import 'package:ar_shopping/core/component/custom_body_bacground.dart';
 import 'package:ar_shopping/core/component/custom_botton.dart';
+import 'package:ar_shopping/core/component/custom_network_image.dart';
 import 'package:ar_shopping/features/home/data/models/product.dart';
 import 'package:ar_shopping/features/card/presentation/view/widget/cart_appbar_action.dart';
 import 'package:ar_shopping/core/component/custom_appbar.dart';
@@ -16,20 +17,20 @@ import 'widgets/model_view_bottom.dart';
 
 class ProductScreen extends StatefulWidget {
   const ProductScreen({required this.product, Key? key}) : super(key: key);
-  final Product product;
+  final ProductModel product;
 
   @override
   State<ProductScreen> createState() => _ProductScreenState();
 }
 
 class _ProductScreenState extends State<ProductScreen> {
-  Product get product => widget.product;
+  ProductModel get product => widget.product;
   String? selectedImageUrl;
   String? selectedSize;
   Cart cart = Cart();
   @override
   void initState() {
-    selectedImageUrl = product.imageUrls.first;
+    selectedImageUrl = product.img;
     selectedSize = product.sizes?.first;
     super.initState();
   }
@@ -51,33 +52,28 @@ class _ProductScreenState extends State<ProductScreen> {
   Widget build(BuildContext context) {
     final screenHight = MediaQuery.of(context).size.height;
     final screenWidth = MediaQuery.of(context).size.width;
-    List<Widget> imagePreviews = product.imageUrls
-        .map(
-          (url) => Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 8.0),
-            child: GestureDetector(
-              onTap: () => setSelectedImageUrl(url),
-              child: Container(
-                height: 50,
-                width: 50,
-                padding: const EdgeInsets.all(2),
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  border: selectedImageUrl == url
-                      ? Border.all(
-                          color: Theme.of(context).colorScheme.secondary,
-                          width: 1.75)
-                      : null,
-                  borderRadius: BorderRadius.circular(8),
-                ),
-                child: Image.network(
-                  url,
-                ),
-              ),
-            ),
+    Widget imagePreviews = Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 8.0),
+      child: GestureDetector(
+        onTap: () => setSelectedImageUrl(product.img ?? ''),
+        child: Container(
+          height: 50,
+          width: 50,
+          padding: const EdgeInsets.all(2),
+          decoration: BoxDecoration(
+            color: Colors.white,
+            border: selectedImageUrl == product.img
+                ? Border.all(
+                    color: Theme.of(context).colorScheme.secondary, width: 1.75)
+                : null,
+            borderRadius: BorderRadius.circular(8),
           ),
-        )
-        .toList();
+          child: CustomNetworkImage(
+            imageUrl: product.img ?? '',
+          ),
+        ),
+      ),
+    );
 
     List<Widget> sizeSelectionWidgets = product.sizes
             ?.map(
@@ -122,17 +118,16 @@ class _ProductScreenState extends State<ProductScreen> {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Expanded(
-              child: Image.network(
-                selectedImageUrl!,
-                fit: BoxFit.fill,
-                // color: CustomColors.kGreyBackground,
-                // colorBlendMode: BlendMode.multiply,
+              child: CustomNetworkImage(
+                imageUrl: selectedImageUrl!,
+               
+              
               ),
             ),
             const SizedBox(height: 18),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
-              children: imagePreviews,
+              children: [imagePreviews],
             ),
           ],
         );
@@ -141,7 +136,7 @@ class _ProductScreenState extends State<ProductScreen> {
           child: Text('Soon wait....'),
         );
       }
-      return ModelView();
+      return ModelView(obj: product.obj);
     }
 
     return Scaffold(
@@ -211,7 +206,7 @@ class _ProductScreenState extends State<ProductScreen> {
                         height: 10,
                       ),
                       Text(
-                        product.name,
+                        product.pcName ?? 'name',
                         style: Theme.of(context)
                             .textTheme
                             .titleLarge
@@ -223,7 +218,7 @@ class _ProductScreenState extends State<ProductScreen> {
                       Row(
                         children: [
                           Text(
-                            '\$${product.cost}',
+                            '\$${product.price}',
                             style: Theme.of(context)
                                 .textTheme
                                 .titleMedium!

@@ -30,8 +30,7 @@ class _PaySelectViewState extends State<PaySelectView> {
 
   @override
   Widget build(BuildContext context) {
-    var height = MediaQuery.of(context).size.height;
-    var width = MediaQuery.of(context).size.width;
+  
     var cubit = BlocProvider.of<InitPaymentCubit>(context);
 
     return Scaffold(
@@ -39,8 +38,7 @@ class _PaySelectViewState extends State<PaySelectView> {
         title: 'pay',
       ),
       body: CustomBody(
-        bodyHeight: height,
-        bodyWidth: width,
+ 
         child: BlocBuilder<InitPaymentCubit, InitPaymentState>(
           builder: (context, state) {
             print(state);

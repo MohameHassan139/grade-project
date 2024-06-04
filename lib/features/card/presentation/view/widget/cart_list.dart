@@ -19,7 +19,7 @@ class Cart with ChangeNotifier {
   double get totalCost {
     double total = 0;
     for (var item in itemsInCart) {
-      total += item.product.cost;
+      total += double.parse(item.product.price ?? '0');
     }
     return total;
   }

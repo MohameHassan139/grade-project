@@ -4,7 +4,7 @@ class DioConfig {
   static Dio getDio() {
     Dio dio = Dio(
       BaseOptions(
-        baseUrl: 'https://accept.paymob.com/api/',
+        receiveDataWhenStatusError: true
       ),
     );
     dio.interceptors.add(LogInterceptor(responseBody: true));

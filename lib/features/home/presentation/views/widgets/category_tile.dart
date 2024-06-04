@@ -29,7 +29,7 @@ class CategoryTile extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          category.title.toUpperCase(),
+          category.title ?? '',
           style: Theme.of(context).textTheme.headlineMedium!.copyWith(
                 color: CustomColors.kWhiteColor,
               ),

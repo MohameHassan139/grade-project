@@ -9,7 +9,7 @@ class ProductRow extends StatelessWidget {
       {required this.products, required this.productType, Key? key})
       : super(key: key);
   final String productType;
-  final List<Product> products;
+  final List<ProductModel> products;
 
   @override
   Widget build(BuildContext context) {

@@ -55,14 +55,14 @@ class _CartScreenState extends State<CartScreen> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    item.product.name,
+                    item.product.pcName ?? '',
                     style: Theme.of(context).textTheme.titleMedium,
                   ),
                   const SizedBox(
                     height: 8,
                   ),
                   Text(
-                    '\$${item.product.cost}',
+                    '\$${item.product.price}',
                     style: Theme.of(context).textTheme.titleSmall!.copyWith(
                           color: Theme.of(context).colorScheme.secondary,
                         ),

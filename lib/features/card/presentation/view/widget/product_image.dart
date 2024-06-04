@@ -1,4 +1,5 @@
 import 'package:ar_shopping/constants/app_colors.dart';
+import 'package:ar_shopping/core/component/custom_network_image.dart';
 import 'package:ar_shopping/features/home/data/models/product.dart';
 import 'package:ar_shopping/features/home/presentation/views/widgets/category_tile.dart';
 import 'package:flutter/material.dart';
@@ -9,7 +10,7 @@ class ProductImage extends StatelessWidget {
     required this.product,
   }) : super(key: key);
 
-  final Product product;
+  final ProductModel product;
 
   @override
   Widget build(BuildContext context) {
@@ -22,14 +23,10 @@ class ProductImage extends StatelessWidget {
           color: CustomColors.kGreyBackground,
         ),
         clipBehavior: Clip.hardEdge,
-        child: Image.network(
-          product.imageUrls.first,
-          fit: BoxFit.fill,
-          loadingBuilder: (_, child, loadingProgress) => loadingProgress == null
-              ? child
-              : const Center(child: CircularProgressIndicator()),
-          color: CustomColors.kGreyBackground,
-          colorBlendMode: BlendMode.multiply,
+        child: CustomNetworkImage(
+          imageUrl: product.img ?? '',
+
+          // colorBlendMode: BlendMode.multiply,
         ),
       ),
     );

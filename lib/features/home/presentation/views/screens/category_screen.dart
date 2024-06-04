@@ -4,7 +4,6 @@ import 'package:ar_shopping/features/home/data/models/product.dart';
 import 'package:ar_shopping/features/card/presentation/view/widget/cart_appbar_action.dart';
 import 'package:ar_shopping/features/home/presentation/views/widgets/product_row.dart';
 import 'package:flutter/material.dart';
-
 import '../../../../../constants/app_colors.dart';
 import '../../../../../core/component/custom_appbar.dart';
 
@@ -22,24 +21,24 @@ class _CategoryScreenState extends State<CategoryScreen> {
   Category get category => widget.category;
   Filters filterValue = Filters.popular;
   String? selection;
-  late List<Product> _products;
+  late List<ProductModel> _products;
 
   @override
   void initState() {
-    selection = category.selections.first;
-    _products = products.where((p) => p.category == category).toList();
+    selection = category.selections?.first;
+    _products = products.where((p) => p.pcType == category).toList();
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
-    final screenHight = MediaQuery.of(context).size.height;
-    final screenWidth = MediaQuery.of(context).size.width;
+    
     List<ProductRow> productRows = category.selections
+        !
         .map((s) => ProductRow(
               productType: s,
               products: _products
-                  .where((p) => p.productType.toLowerCase() == s.toLowerCase())
+                  .where((p) => p.pcType?.toLowerCase() == s.toLowerCase())
                   .toList(),
             ))
         .toList();
@@ -52,8 +51,7 @@ class _CategoryScreenState extends State<CategoryScreen> {
         ],
       ),
       body: CustomBody(
-        bodyHeight: screenHight,
-        bodyWidth: screenWidth,
+        
         child: ListView.separated(
           padding: const EdgeInsets.symmetric(vertical: 18),
           itemCount: productRows.length,

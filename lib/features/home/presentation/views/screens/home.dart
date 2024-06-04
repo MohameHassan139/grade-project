@@ -1,7 +1,9 @@
 import 'package:ar_shopping/features/home/data/models/product.dart';
 import 'package:ar_shopping/features/card/presentation/view/widget/cart_appbar_action.dart';
+import 'package:ar_shopping/features/home/presentation/cubit/home_cubit_cubit.dart';
 import 'package:ar_shopping/features/home/presentation/views/widgets/category_tile.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../../constants/app_colors.dart';
 import '../../../../../core/component/custom_body_bacground.dart';
 import '../../../data/models/news_item.dart';
@@ -20,6 +22,8 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
+    var cubit = BlocProvider.of<HomeCubitCubit>(context);
+
     var listViewPadding =
         const EdgeInsets.symmetric(horizontal: 16, vertical: 24);
     final screenHight = MediaQuery.of(context).size.height;
@@ -39,12 +43,10 @@ class _HomePageState extends State<HomePage> {
           child: SingleChildScrollView(
             child: Column(
               children: [
-                CustomCarousleSlider(
-                  news: news,
-                ),
+                CustomCarousleSlider(),
                 ListView(
                   shrinkWrap: true,
-                  physics: BouncingScrollPhysics(),
+                  physics: const BouncingScrollPhysics(),
                   padding: listViewPadding,
                   children: [
                     Text(
@@ -78,7 +80,10 @@ class _HomePageState extends State<HomePage> {
             ),
           ),
         ),
-      ), // This trailing comma makes auto-formatting nicer for build methods.
+      ),
+      floatingActionButton: FloatingActionButton(onPressed: () {
+        cubit.getSpacialOffer();
+      }),
     );
   }
 }

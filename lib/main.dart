@@ -1,4 +1,6 @@
 import 'package:ar_shopping/constants/app_colors.dart';
+import 'package:ar_shopping/features/home/data/repo/home_repo_impl.dart';
+import 'package:ar_shopping/features/home/presentation/cubit/home_cubit_cubit.dart';
 import 'package:ar_shopping/features/home/presentation/views/screens/home.dart';
 import 'package:ar_shopping/features/payment/data/repo/payment_repo_impl.dart';
 import 'package:ar_shopping/features/payment/presentation/view_model/init_payment_cubit/init_payment_cubit.dart';
@@ -36,6 +38,12 @@ class MyApp extends StatelessWidget {
           create: (context) => FetchSearchProuductsCubit(
             searchRepo: getIt.get<SearchRepoImpl>(),
           ),
+        ),
+
+        BlocProvider(
+          create: (context) => HomeCubitCubit(
+            homeRepo: getIt.get<HomeRepoImpl>(),
+          )..getSpacialOffer(),
         ),
       ],
       child: MaterialApp(
