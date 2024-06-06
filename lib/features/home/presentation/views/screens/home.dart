@@ -1,6 +1,8 @@
+import 'package:ar_shopping/core/component/error_widget.dart';
 import 'package:ar_shopping/features/home/data/models/product.dart';
 import 'package:ar_shopping/features/card/presentation/view/widget/cart_appbar_action.dart';
-import 'package:ar_shopping/features/home/presentation/cubit/home_cubit_cubit.dart';
+import 'package:ar_shopping/features/home/presentation/category/category_cubit.dart';
+import 'package:ar_shopping/features/home/presentation/offer_cubit/home_cubit_cubit.dart';
 import 'package:ar_shopping/features/home/presentation/views/widgets/category_tile.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -9,6 +11,7 @@ import '../../../../../core/component/custom_body_bacground.dart';
 import '../../../data/models/news_item.dart';
 import '../widgets/carousle_silder.dart';
 import '../../../../../core/component/custom_appbar.dart';
+import '../widgets/category_loading.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({
@@ -57,22 +60,43 @@ class _HomePageState extends State<HomePage> {
                           ?.copyWith(color: CustomColors.kWhiteColor),
                     ),
                     const SizedBox(height: 16),
-                    CategoryTile(
-                      imageUrl: manLookRightImageUrl,
-                      category: mensCategory,
-                      imageAlignment: Alignment.topCenter,
-                    ),
-                    const SizedBox(height: 16),
-                    CategoryTile(
-                      imageUrl: womanLookLeftImageUrl,
-                      category: womensCategory,
-                      imageAlignment: Alignment.topCenter,
-                    ),
-                    const SizedBox(height: 16),
-                    CategoryTile(
-                      imageUrl:
-                          dogImageUrl, // TODO: Replace with your own image
-                      category: petsCategory,
+                    BlocBuilder<CategoryCubit, CategoryState>(
+                      builder: (context, state) {
+                        if (state is GetCategorySuccess) {
+                          return ListView.separated(
+                            shrinkWrap: true,
+                            physics: const BouncingScrollPhysics(),
+                            itemBuilder: (context, index) => CategoryTile(
+                              imageUrl: manLookRightImageUrl,
+                              category: state.categories.categories![index],
+                              imageAlignment: Alignment.topCenter,
+                            ),
+                            itemCount: state.categories.categories?.length ?? 0,
+                            separatorBuilder: (context, index) =>
+                                SizedBox(height: 16),
+                          );
+                        } else if (state is GetCategoryLoading) {
+                          // CategoryTileShimmer
+
+                          return ListView.separated(
+                            shrinkWrap: true,
+                            physics: const BouncingScrollPhysics(),
+                            itemBuilder: (context, index) =>
+                                CategoryTileShimmer(),
+                            itemCount: 3,
+                            separatorBuilder: (context, index) =>
+                                SizedBox(height: 16),
+                          );
+                        } else if (state is GetCategoryFailure) {
+                          // CategoryTileShimmer
+
+                          return Center(
+                            child: CustomErrorWidget(errorMessage: state.error),
+                          );
+                        } else {
+                          return Text('unknown');
+                        }
+                      },
                     ),
                   ],
                 ),

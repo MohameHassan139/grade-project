@@ -9,15 +9,16 @@ import 'package:dio/dio.dart';
 import '../../../../constants/endpoint.dart';
 import '../../../../core/api/api_service.dart';
 import '../models/category.dart';
+import '../models/offer_model.dart';
 
 class HomeRepoImpl implements HomeRepo {
   @override
-  Future<Either<Category, Failuer>> getCategory() async {
+  Future<Either<CategoryModel, Failuer>> getCategory() async {
     try {
       var data = await ApiService.api.get(
         quray: ApiConstant.categorytUrl,
       );
-      Category response = Category.fromJson(data);
+      CategoryModel response = CategoryModel.fromJson(data);
       return left(response);
     } catch (e) {
       if (e is DioException) {
@@ -28,17 +29,17 @@ class HomeRepoImpl implements HomeRepo {
   }
 
   @override
-  Future<Either<List<ProductModel>, Failuer>> getSpacialProdect() async {
+  Future<Either<Offermodel, Failuer>> getSpacialProdect() async {
     print('@@@@@@@@@@@@@@@@ 2 <=======');
 
     try {
       var data = await ApiService.api.get(quray: ApiConstant.discountUrl);
       print('@@@@@@@@@@@@@@@@ 3 <=======');
 
-      List<ProductModel> productModels = dataHandling(data);
+      Offermodel productModels = Offermodel.fromJson(data);
       print('@@@@@@@@@@@@@@@@ 4 <=======');
 
-      return left(productModels);
+      return left(productModels );
     } catch (e) {
       if (e is DioException) {
         return right(ServerFailuer.fromDioError(dioException: e));

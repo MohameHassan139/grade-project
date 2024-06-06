@@ -25,18 +25,6 @@ final class GetSpacialOfferFailure extends HomeCubitState {
 }
 
 final class GetSpacialOfferSuccess extends HomeCubitState {
-  final List<ProductModel> products;
+  final Offermodel products;
   GetSpacialOfferSuccess({required this.products});
-}
-
-final class GetCategoryLoading extends HomeCubitState {}
-
-final class GetCategoryFailure extends HomeCubitState {
-  final String error;
-  GetCategoryFailure({required this.error});
-}
-
-final class GetCategorySuccess extends HomeCubitState {
-  final List<ProductModel> products;
-  GetCategorySuccess({required this.products});
 }

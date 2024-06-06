@@ -26,7 +26,7 @@ class _CategoryScreenState extends State<CategoryScreen> {
   @override
   void initState() {
     selection = category.selections?.first;
-    _products = products.where((p) => p.pcType == category).toList();
+    // _products = products.where((p) => p.pcType == category).toList();
     super.initState();
   }
 

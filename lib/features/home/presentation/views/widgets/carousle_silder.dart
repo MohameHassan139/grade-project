@@ -1,7 +1,7 @@
 import 'package:ar_shopping/constants/app_colors.dart';
 import 'package:ar_shopping/core/component/error_widget.dart';
 import 'package:ar_shopping/features/home/data/models/product.dart';
-import 'package:ar_shopping/features/home/presentation/cubit/home_cubit_cubit.dart';
+import 'package:ar_shopping/features/home/presentation/offer_cubit/home_cubit_cubit.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -17,6 +17,8 @@ import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:shimmer/shimmer.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+
+import '../../../data/models/offer_model.dart';
 // // Import your other necessary packages and widgets
 
 // class CustomCarousleSlider extends StatefulWidget {
@@ -233,7 +235,7 @@ class _CustomCarousleSliderState extends State<CustomCarousleSlider> {
     double width = MediaQuery.of(context).size.width;
     return BlocBuilder<HomeCubitCubit, HomeCubitState>(
       builder: (context, state) {
-        List<ProductModel> productModels = [];
+        late Offermodel productModels;
         if (state is GetSpacialOffertsLoading) {
           print('loadiiiing');
           return CarousleSilderLoading();
@@ -244,15 +246,15 @@ class _CustomCarousleSliderState extends State<CustomCarousleSlider> {
           return CustomErrorWidget(errorMessage: state.error);
         }
 
-        final List<Widget> imageSliders = productModels
+        final List<Widget> imageSliders = productModels.offers!
             .map((item) => InkWell(
-                  onTap: () {
-                    pushScreen(
-                        context: context,
-                        screen: ProductScreen(
-                          product: item,
-                        ));
-                  },
+                  // onTap: () {
+                  //   pushScreen(
+                  //       // context: context,
+                  //       // screen: ProductScreen(
+                  //       //   product: item,
+                  //       // ));
+                  // },
                   child: Container(
                     margin: const EdgeInsets.all(5.0),
                     child: ClipRRect(
@@ -262,7 +264,7 @@ class _CustomCarousleSliderState extends State<CustomCarousleSlider> {
                           children: <Widget>[
                             CustomNetworkImage(
                               width: width * .9,
-                              imageUrl: item.img ?? '',
+                              imageUrl: item.images?[0].url ?? '',
                             ),
                             // categrory
                             Positioned(
@@ -275,7 +277,7 @@ class _CustomCarousleSliderState extends State<CustomCarousleSlider> {
                                   borderRadius: BorderRadius.circular(16),
                                 ),
                                 child: Text(
-                                  item.pcType ?? 'type',
+                                  item.price ?? '0',
                                   style: TextStyle(
                                       color: Colors.white,
                                       fontWeight: FontWeight.bold),
@@ -304,7 +306,7 @@ class _CustomCarousleSliderState extends State<CustomCarousleSlider> {
                                     padding: const EdgeInsets.symmetric(
                                         vertical: 10.0, horizontal: 20.0),
                                     child: Text(
-                                      item.pcName ?? 'Name',
+                                      item.name ?? 'Name',
                                       maxLines: 2,
                                       style: Theme.of(context)
                                           .textTheme
@@ -339,7 +341,7 @@ class _CustomCarousleSliderState extends State<CustomCarousleSlider> {
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
-            children: productModels.asMap().entries.map((entry) {
+            children: productModels.offers!.asMap().entries.map((entry) {
               return GestureDetector(
                 onTap: () => _controller.animateToPage(entry.key),
                 child: Container(
