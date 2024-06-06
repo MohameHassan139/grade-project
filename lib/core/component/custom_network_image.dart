@@ -16,18 +16,22 @@ class CustomNetworkImage extends StatelessWidget {
       image: NetworkImage(
         imageUrl,
       ),
-      loadingBuilder: (context, child, loadingProgress) =>
-          loadingProgress != null
-              ? Shimmer.fromColors(
-                  baseColor: AppColors.KshimmerBaseColor,
-                  highlightColor: AppColors.KshimmerHighlightColor,
-                  child: Container(
-
-                    color: Colors.grey,
-                  ),
-                )
-              : child,
+      loadingBuilder: (context, child, loadingProgress) {
+        if (loadingProgress == null) {
+          return child;
+        } else {
+          return Shimmer.fromColors(
+            baseColor: AppColors.KshimmerBaseColor,
+            highlightColor: AppColors.KshimmerHighlightColor,
+            child: Container(
+              color: Colors.grey,
+            ),
+          );
+        }
+      },
       errorBuilder: (context, error, stackTrace) {
+        print('Error loading image: $error');
+        print(imageUrl);
         return Container(
           color: Colors.grey,
           child: const Center(

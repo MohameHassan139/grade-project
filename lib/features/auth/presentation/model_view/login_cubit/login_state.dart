@@ -16,3 +16,5 @@ final class LoginSuccess extends LoginState {
   final AuthModel model;
   LoginSuccess({required this.model});
 }
+
+final class ShowPasswordstate extends LoginState {}

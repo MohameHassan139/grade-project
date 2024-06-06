@@ -8,7 +8,11 @@ import 'package:ar_shopping/features/payment/presentation/views/payment_select_v
 import 'package:ar_shopping/features/search/presentation/view_models/fetch_search_books/fetch_search_books_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'core/utils/cashe_helper.dart';
 import 'core/utils/service_locator.dart';
+import 'features/auth/data/repo/auth_repo_impl.dart';
+import 'features/auth/presentation/model_view/login_cubit/login_cubit.dart';
+import 'features/auth/presentation/model_view/register_cubit/register_cubit.dart';
 import 'features/auth/presentation/view/screens/login_page.dart';
 import 'features/auth/presentation/view/screens/register.dart';
 import 'features/bottom_navigator_bar/presentation/view/bottom_nav_bar.dart';
@@ -16,6 +20,7 @@ import 'features/bottom_navigator_bar/presentation/view_model/bottom_nav_bar_cub
 import 'features/search/data/repos/search_repo_impl.dart';
 
 void main() {
+  CacheHelper.init();
   setupServiceLocator();
   runApp(const MyApp());
 }
@@ -39,11 +44,16 @@ class MyApp extends StatelessWidget {
             searchRepo: getIt.get<SearchRepoImpl>(),
           ),
         ),
-
         BlocProvider(
           create: (context) => HomeCubitCubit(
             homeRepo: getIt.get<HomeRepoImpl>(),
           )..getSpacialOffer(),
+        ),
+        BlocProvider<LoginCubit>(
+          create: (context) => LoginCubit(authRepo: getIt.get<AuthRepoImpl>()),
+        ),
+         BlocProvider<RegisterCubit>(
+          create: (context) => RegisterCubit(authRepo: getIt.get<AuthRepoImpl>()),
         ),
       ],
       child: MaterialApp(
@@ -55,7 +65,7 @@ class MyApp extends StatelessWidget {
         ),
         debugShowCheckedModeBanner: false,
         // home: const PaySelectView(),
-        home: BottomNavBarView(),
+        home: LoginPage(),
       ),
     );
   }

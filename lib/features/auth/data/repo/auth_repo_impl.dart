@@ -1,5 +1,7 @@
+import 'package:ar_shopping/constants/endpoint.dart';
 import 'package:ar_shopping/core/errors/failures.dart';
-import 'package:ar_shopping/features/auth/data/models/auth_test_model.dart';
+import 'package:ar_shopping/features/auth/data/models/auth_model.dart';
+import 'package:ar_shopping/features/auth/data/models/user_data.dart';
 import 'package:ar_shopping/features/auth/data/repo/auth_repo.dart';
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
@@ -12,7 +14,7 @@ class AuthRepoImpl implements AuthRepo {
       {required String email, required String password}) async {
     try {
       var data = await ApiService.api.post(
-          quray: 'volumes?Filtering=free-ebooks&q=flutter&Sorting=newest',
+          quray: ApiConstant.login,
           data: {
             'email': email,
             'password': password,
@@ -28,10 +30,11 @@ class AuthRepoImpl implements AuthRepo {
   }
 
   @override
-  Future<Either<AuthModel, Failuer>> register() async {
+  Future<Either<AuthModel, Failuer>> register(
+      {required UserData userData}) async {
     try {
       var data = await ApiService.api
-          .post(quray: 'volumes?Filtering=free-ebooks&q=subject:science');
+          .post(quray: ApiConstant.register, data: userData.toJson());
       AuthModel response = AuthModel.fromJson(data);
       return left(response);
     } catch (e) {

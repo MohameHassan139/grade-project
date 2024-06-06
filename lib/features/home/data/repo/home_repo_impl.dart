@@ -15,7 +15,7 @@ class HomeRepoImpl implements HomeRepo {
   Future<Either<Category, Failuer>> getCategory() async {
     try {
       var data = await ApiService.api.get(
-        quray: ApiConstant.CategorytUrl,
+        quray: ApiConstant.categorytUrl,
       );
       Category response = Category.fromJson(data);
       return left(response);
@@ -51,7 +51,7 @@ class HomeRepoImpl implements HomeRepo {
   Future<Either<List<ProductModel>, Failuer>> getProducts() async {
     try {
       var data = await ApiService.api.get(
-        quray: ApiConstant.CategorytUrl,
+        quray: ApiConstant.categorytUrl,
       );
 
       List<ProductModel> productModels = dataHandling(data);
