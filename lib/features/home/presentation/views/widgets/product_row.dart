@@ -9,12 +9,12 @@ class ProductRow extends StatelessWidget {
       {required this.products, required this.productType, Key? key})
       : super(key: key);
   final String productType;
-  final List<ProductModel> products;
+  final ProductsModel products;
 
   @override
   Widget build(BuildContext context) {
     List<ProductTile> productTiles =
-        products.map((p) => ProductTile(product: p)).toList();
+        products.products!.map((p) => ProductTile(product: p)).toList();
 
     return productTiles.isEmpty
         ? const SizedBox.shrink()

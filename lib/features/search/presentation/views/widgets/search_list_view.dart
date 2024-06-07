@@ -1,4 +1,4 @@
-import 'package:ar_shopping/features/search/presentation/views/widgets/best_seller_book_list_shimmer.dart';
+import 'package:ar_shopping/features/search/presentation/views/widgets/product_list_shimmer.dart';
 import 'package:ar_shopping/features/search/presentation/views/widgets/best_seller_item.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -20,19 +20,19 @@ class SearchListView extends StatelessWidget {
     return BlocBuilder<FetchSearchProuductsCubit, FetchSearchProductsState>(
         builder: (context, state) {
       if (state is FetchSearchSuccess) {
-        if (state.products.items != null) {
+        if (state.products.products != null) {
           return ListView.separated(
-            itemCount: state.products.items?.length ?? 0,
+            itemCount: state.products.products?.length ?? 0,
             separatorBuilder: (context, index) => const SizedBox(
               height: 20,
             ),
             itemBuilder: (context, index) => InkWell(
               onTap: () {
                 GoRouter.of(context).pushNamed(AppRoutNamed.bookDetails,
-                    extra: state.products.items![index]);
+                    extra: state.products.products![index]);
               },
               child: BestSellerItem(
-                productModel: state.products.items![index],
+                productModel: state.products.products![index],
               ),
             ),
           );

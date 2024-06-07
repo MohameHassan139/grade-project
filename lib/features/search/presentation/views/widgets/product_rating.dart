@@ -25,14 +25,14 @@ class ProductRating extends StatelessWidget {
           width: 6.3,
         ),
         Text(
-          "${rate ?? 0.0}",
+          "${rate ?? 4.0}",
           style: Styles.textStyle16,
         ),
         const SizedBox(
           width: 5,
         ),
         Text(
-          "(${count ?? 0})",
+          "(${count ?? 10})",
           style: Styles.textStyle14.copyWith(color: const Color(0xff707070)),
         ),
       ],

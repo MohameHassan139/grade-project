@@ -1,8 +1,8 @@
 import 'package:bloc/bloc.dart';
 import 'package:meta/meta.dart';
 
-import '../../data/models/category.dart';
-import '../../data/repo/home_repo.dart';
+import '../../../data/models/category.dart';
+import '../../../data/repo/home_repo.dart';
 
 part 'category_state.dart';
 

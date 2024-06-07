@@ -17,6 +17,6 @@ final class FetchSearchFailure extends FetchSearchProductsState {
 }
 
 final class FetchSearchSuccess extends FetchSearchProductsState {
-  final ProductModels products;
+  final ProductsModel products;
   const FetchSearchSuccess({required this.products});
 }

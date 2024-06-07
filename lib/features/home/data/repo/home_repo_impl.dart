@@ -49,13 +49,14 @@ class HomeRepoImpl implements HomeRepo {
   }
 
   @override
-  Future<Either<List<ProductModel>, Failuer>> getProducts() async {
+  Future<Either<ProductsModel, Failuer>> getProducts({required int id}) async {
     try {
       var data = await ApiService.api.get(
-        quray: ApiConstant.categorytUrl,
+        quray: "${ApiConstant.subCategorytUrl}/$id",
+        // quray: 'https://api.alsafwa1.com/api/homePage/subCategoryProducts/5'
       );
 
-      List<ProductModel> productModels = dataHandling(data);
+      ProductsModel productModels = ProductsModel.fromJson(data);
 
       return left(productModels);
     } catch (e) {
@@ -67,19 +68,4 @@ class HomeRepoImpl implements HomeRepo {
   }
 }
 
-List<ProductModel> dataHandling(dynamic data) {
-  List<ProductModel> productModels = [];
 
-  print('@@@@@@@@@@@@@@@@ 1 <=======');
-  // Parsing JSON string
-  // List<dynamic> jsonData = json.decode(data);
-  // ProductModel productModel;
-
-  data.forEach((e) {
-    print('@@@@@@@@@@@@@@@@');
-    print(e);
-    productModels.add(ProductModel.fromJson(e as Map<String, dynamic>));
-  });
-
-  return productModels;
-}

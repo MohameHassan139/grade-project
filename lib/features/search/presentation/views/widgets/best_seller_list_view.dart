@@ -6,7 +6,7 @@ import 'package:go_router/go_router.dart';
 import '../../../../../core/component/error_widget.dart';
 import '../../../../../core/utils/app_router.dart';
 
-import 'best_seller_book_list_shimmer.dart';
+import 'product_list_shimmer.dart';
 import 'best_seller_item.dart';
 
 class BestSellerListView extends StatelessWidget {
@@ -22,17 +22,17 @@ class BestSellerListView extends StatelessWidget {
         return ListView.separated(
           shrinkWrap: true,
           physics: const NeverScrollableScrollPhysics(),
-          itemCount: state.products.items?.length ?? 0,
+          itemCount: state.products.products?.length ?? 0,
           separatorBuilder: (context, index) => const SizedBox(
             height: 20,
           ),
           itemBuilder: (context, index) => InkWell(
-              onTap: () {
-                GoRouter.of(context).pushNamed(AppRoutNamed.bookDetails,
-                    extra: state.products.items![index]);
-              },
+              // onTap: () {
+              //   GoRouter.of(context).pushNamed(AppRoutNamed.bookDetails,
+              //       extra: state.products.items![index]);
+              // },
               child: BestSellerItem(
-                productModel: state.products,
+            productModel: state.products.products![index],
               )),
         );
       } else if (state is FetchSearchLoading) {

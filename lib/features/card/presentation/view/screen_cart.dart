@@ -55,7 +55,7 @@ class _CartScreenState extends State<CartScreen> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    item.product.pcName ?? '',
+                    item.product.name ?? '',
                     style: Theme.of(context).textTheme.titleMedium,
                   ),
                   const SizedBox(

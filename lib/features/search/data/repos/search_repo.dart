@@ -1,9 +1,10 @@
 
 import 'package:dartz/dartz.dart';
 import '../../../../core/errors/failures.dart';
-import '../models/product_model.dart';
+import '../../../home/data/models/product.dart';
+
 
 abstract class SearchRepo {
-  Future<Either<ProductModels, Failuer>> fetchSearchedrBooks(
+  Future<Either<ProductsModel, Failuer>> fetchSearchedrBooks(
       {required String category});
 }

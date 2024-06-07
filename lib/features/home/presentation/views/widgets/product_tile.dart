@@ -9,7 +9,7 @@ import 'package:flutter/services.dart';
 class ProductTile extends StatelessWidget {
   const ProductTile({required this.product, Key? key}) : super(key: key);
 
-  final ProductModel product;
+  final Product product;
 
   @override
   Widget build(BuildContext context) {
@@ -31,7 +31,7 @@ class ProductTile extends StatelessWidget {
               height: 8,
             ),
             Text(
-              product.pcName??'',
+              product.name ?? '',
               maxLines: 1,
               overflow: TextOverflow.ellipsis,
               style: Theme.of(context)

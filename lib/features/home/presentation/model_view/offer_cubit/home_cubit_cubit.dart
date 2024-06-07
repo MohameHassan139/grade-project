@@ -2,8 +2,8 @@ import 'package:ar_shopping/features/home/data/repo/home_repo.dart';
 import 'package:bloc/bloc.dart';
 import 'package:meta/meta.dart';
 
-import '../../data/models/offer_model.dart';
-import '../../data/models/product.dart';
+import '../../../data/models/offer_model.dart';
+import '../../../data/models/product.dart';
 
 part 'home_cubit_state.dart';
 
@@ -21,17 +21,17 @@ class HomeCubitCubit extends Cubit<HomeCubitState> {
     });
   }
 
-  Future<void> getProducts() async {
-    emit(GetProductsLoading());
-    var value = await homeRepo.getProducts();
-    value.fold((products) async {
-      emit(GetProductsSuccess(products: products));
+  // Future<void> getProducts() async {
+  //   emit(GetProductsLoading());
+  //   var value = await homeRepo.getProducts();
+  //   value.fold((products) async {
+  //     emit(GetProductsSuccess(products: products));
 
-      print(products);
-    }, (error) {
-      print(error.errorMessage);
+  //     print(products);
+  //   }, (error) {
+  //     print(error.errorMessage);
 
-      emit(GetSpacialOfferFailure(error: error.errorMessage));
-    });
-  }
+  //     emit(GetSpacialOfferFailure(error: error.errorMessage));
+  //   });
+  // }
 }

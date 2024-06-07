@@ -1,6 +1,6 @@
 import 'package:ar_shopping/constants/app_colors.dart';
 import 'package:ar_shopping/features/home/data/repo/home_repo_impl.dart';
-import 'package:ar_shopping/features/home/presentation/offer_cubit/home_cubit_cubit.dart';
+import 'package:ar_shopping/features/home/presentation/model_view/offer_cubit/home_cubit_cubit.dart';
 import 'package:ar_shopping/features/home/presentation/views/screens/home.dart';
 import 'package:ar_shopping/features/payment/data/repo/payment_repo_impl.dart';
 import 'package:ar_shopping/features/payment/presentation/view_model/init_payment_cubit/init_payment_cubit.dart';
@@ -17,7 +17,9 @@ import 'features/auth/presentation/view/screens/login_page.dart';
 import 'features/auth/presentation/view/screens/register.dart';
 import 'features/bottom_navigator_bar/presentation/view/bottom_nav_bar.dart';
 import 'features/bottom_navigator_bar/presentation/view_model/bottom_nav_bar_cubit/bottom_nav_bar_cubit_cubit.dart';
-import 'features/home/presentation/category/category_cubit.dart';
+import 'features/home/presentation/model_view/category/category_cubit.dart';
+// import 'features/home/presentation/model_view/subcategory/sub_category_cubit.dart';
+import 'features/home/presentation/model_view/cubit/sub_category_cubit.dart';
 import 'features/search/data/repos/search_repo_impl.dart';
 
 void main() {
@@ -45,6 +47,12 @@ class MyApp extends StatelessWidget {
             searchRepo: getIt.get<SearchRepoImpl>(),
           ),
         ),
+        // SubCategoryCubit
+        BlocProvider(
+          create: (context) => SubCategoryCubit(
+            homeRepo: getIt.get<HomeRepoImpl>(),
+          ),
+        ),
         BlocProvider(
           create: (context) => HomeCubitCubit(
             homeRepo: getIt.get<HomeRepoImpl>(),
@@ -70,8 +78,12 @@ class MyApp extends StatelessWidget {
           scaffoldBackgroundColor: CustomColors.kBlackColor,
         ),
         debugShowCheckedModeBanner: false,
-        // home: const PaySelectView(),
-        home: LoginPage(),
+        
+        // home: CacheHelper.prefs!.getString('token')!.isEmpty
+        //     ? LoginPage()
+        //     : BottomNavBarView(),
+        home: BottomNavBarView(),
+        // home: LoginPage(),
       ),
     );
   }

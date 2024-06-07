@@ -1,10 +1,8 @@
-import 'package:ar_shopping/features/search/data/models/product_model.dart';
 import 'package:flutter/material.dart';
-import 'package:shimmer/shimmer.dart';
 
 import '../../../../../core/component/custom_network_image.dart';
-import '../../../../../core/utils/colors.dart';
 import '../../../../../core/utils/styles.dart';
+import '../../../../home/data/models/product.dart';
 import 'product_rating.dart';
 
 class BestSellerItem extends StatelessWidget {
@@ -12,7 +10,7 @@ class BestSellerItem extends StatelessWidget {
     super.key,
     required this.productModel,
   });
-  final ProductModels productModel;
+  final Product productModel;
 
   @override
   Widget build(BuildContext context) {
@@ -21,13 +19,14 @@ class BestSellerItem extends StatelessWidget {
       child: Row(
         children: [
           AspectRatio(
-            aspectRatio: 2.7 / 4,
+            aspectRatio: 3.2 / 4,
             child: Container(
               clipBehavior: Clip.antiAliasWithSaveLayer,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(16),
               ),
-              child: CustomNetworkImage(imageUrl: productModel.items ?? ''),
+              child: CustomNetworkImage(
+                  imageUrl: productModel.images?.first.url ?? ''),
             ),
           ),
           const SizedBox(
@@ -40,7 +39,7 @@ class BestSellerItem extends StatelessWidget {
                 SizedBox(
                   width: MediaQuery.of(context).size.width * 0.5,
                   child: Text(
-                    '{productModel.volumeInfo?.title}',
+                    productModel.name ?? 'name',
                     overflow: TextOverflow.ellipsis,
                     maxLines: 2,
                     style: Styles.textStyle20,
@@ -50,7 +49,7 @@ class BestSellerItem extends StatelessWidget {
                   height: 3,
                 ),
                 Text(
-                  productModel.items ?? "Unkown Auther",
+                  productModel.description ?? "Unkown Auther",
                   overflow: TextOverflow.ellipsis,
                   maxLines: 1,
                   style: Styles.textStyle14,
@@ -61,7 +60,7 @@ class BestSellerItem extends StatelessWidget {
                 Row(
                   children: [
                     Text(
-                      "{productModel.saleInfo?.saleability ?? 'free'}",
+                      productModel.price ?? 'free',
                       overflow: TextOverflow.ellipsis,
                       maxLines: 1,
                       style: Styles.textStyle20.copyWith(

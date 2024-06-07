@@ -1,7 +1,7 @@
 import 'package:ar_shopping/constants/app_colors.dart';
 import 'package:ar_shopping/core/component/error_widget.dart';
 import 'package:ar_shopping/features/home/data/models/product.dart';
-import 'package:ar_shopping/features/home/presentation/offer_cubit/home_cubit_cubit.dart';
+import 'package:ar_shopping/features/home/presentation/model_view/offer_cubit/home_cubit_cubit.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';

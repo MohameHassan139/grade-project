@@ -10,7 +10,7 @@ class ProductImage extends StatelessWidget {
     required this.product,
   }) : super(key: key);
 
-  final ProductModel product;
+  final Product product;
 
   @override
   Widget build(BuildContext context) {
@@ -24,7 +24,7 @@ class ProductImage extends StatelessWidget {
         ),
         clipBehavior: Clip.hardEdge,
         child: CustomNetworkImage(
-          imageUrl: product.img ?? '',
+          imageUrl: product.images?.first.url ?? '',
 
           // colorBlendMode: BlendMode.multiply,
         ),

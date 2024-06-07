@@ -8,5 +8,5 @@ import '../models/product.dart';
 abstract class HomeRepo {
   Future<Either<CategoryModel, Failuer>> getCategory();
   Future<Either<Offermodel, Failuer>> getSpacialProdect();
-  Future<Either<List<ProductModel>, Failuer>> getProducts();
+  Future<Either<ProductsModel, Failuer>> getProducts({required int id});
 }

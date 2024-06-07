@@ -4,63 +4,81 @@ import 'package:ar_shopping/features/home/data/models/product.dart';
 import 'package:ar_shopping/features/card/presentation/view/widget/cart_appbar_action.dart';
 import 'package:ar_shopping/features/home/presentation/views/widgets/product_row.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../../constants/app_colors.dart';
 import '../../../../../core/component/custom_appbar.dart';
+import '../../../../../core/component/error_widget.dart';
+import '../../../../../core/function/push_screen.dart';
+import '../../../../product_details/presentation/view/product_screen.dart';
+import '../../../../search/presentation/views/widgets/best_seller_item.dart';
+import '../../../../search/presentation/views/widgets/product_list_shimmer.dart';
+import '../../model_view/cubit/sub_category_cubit.dart';
+
 
 class CategoryScreen extends StatefulWidget {
   const CategoryScreen({required this.category, Key? key}) : super(key: key);
-  final Category category;
+
+  final Categories category;
 
   @override
   State<CategoryScreen> createState() => _CategoryScreenState();
 }
 
-enum Filters { popular, recent, sale }
-
 class _CategoryScreenState extends State<CategoryScreen> {
-  Category get category => widget.category;
-  Filters filterValue = Filters.popular;
-  String? selection;
-  late List<ProductModel> _products;
-
   @override
   void initState() {
-    selection = category.selections?.first;
-    // _products = products.where((p) => p.pcType == category).toList();
+    var cubit = BlocProvider.of<SubCategoryCubit>(context);
+    cubit.getSubCategory(id: widget.category.id ?? 0);
+    // TODO: implement initState
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
-    
-    List<ProductRow> productRows = category.selections
-        !
-        .map((s) => ProductRow(
-              productType: s,
-              products: _products
-                  .where((p) => p.pcType?.toLowerCase() == s.toLowerCase())
-                  .toList(),
-            ))
-        .toList();
     return Scaffold(
       backgroundColor: CustomColors.kBlackColor,
       appBar: CustomAppbar(
-        title: category.title,
+        title: widget.category.name,
         actions: const [
           CartAppBarAction(),
         ],
       ),
       body: CustomBody(
-        
-        child: ListView.separated(
-          padding: const EdgeInsets.symmetric(vertical: 18),
-          itemCount: productRows.length,
-          itemBuilder: (_, index) => productRows[index],
-          separatorBuilder: (_, index) => const SizedBox(
-            height: 18,
-          ),
+        child: Padding(
+          padding: const EdgeInsets.all(12.0),
+          child: BlocBuilder<SubCategoryCubit, SubCategoryState>(
+              builder: (context, state) {
+            if (state is GetSubCategorySuccess) {
+              return ListView.separated(
+                shrinkWrap: true,
+                physics: const NeverScrollableScrollPhysics(),
+                itemCount: state.products.products?.length ?? 0,
+                separatorBuilder: (context, index) => const SizedBox(
+                  height: 20,
+                ),
+                itemBuilder: (context, index) => InkWell(
+                    onTap: () {
+                      pushScreen(
+                          context: context,
+                          screen: ProductScreen(
+                            product: state.products.products![index],
+                          ));
+                    },
+                    child: BestSellerItem(
+                      productModel: state.products.products![index],
+                    )),
+              );
+            } else if (state is GetSubCategoryLoading) {
+              return BestSellerProductListShimmer();
+            } else if (state is GetSubCategoryFailure) {
+              return CustomErrorWidget(errorMessage: state.error);
+            }
+            return const Text('');
+          }),
         ),
       ),
     );
   }
 }
+
+enum Filters { popular, recent, sale }

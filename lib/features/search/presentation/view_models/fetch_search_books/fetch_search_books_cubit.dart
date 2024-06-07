@@ -1,5 +1,6 @@
 import 'package:bloc/bloc.dart';
 
+import '../../../../home/data/models/product.dart';
 import '../../../data/models/product_model.dart';
 import '../../../data/repos/search_repo.dart';
 

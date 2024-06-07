@@ -5,17 +5,17 @@ sealed class HomeCubitState {}
 
 final class HomeCubitInitial extends HomeCubitState {}
 
-final class GetProductsLoading extends HomeCubitState {}
+// final class GetProductsLoading extends HomeCubitState {}
 
-final class GetProductsFailure extends HomeCubitState {
-  final String error;
-  GetProductsFailure({required this.error});
-}
+// final class GetProductsFailure extends HomeCubitState {
+//   final String error;
+//   GetProductsFailure({required this.error});
+// }
 
-final class GetProductsSuccess extends HomeCubitState {
-  final List<ProductModel> products;
-  GetProductsSuccess({required this.products});
-}
+// final class GetProductsSuccess extends HomeCubitState {
+//   final ProductsModel products;
+//   GetProductsSuccess({required this.products});
+// }
 
 final class GetSpacialOffertsLoading extends HomeCubitState {}
 

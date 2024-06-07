@@ -2,7 +2,7 @@ import 'package:ar_shopping/features/home/data/models/product.dart';
 import 'package:flutter/material.dart';
 
 class OrderItem {
-  ProductModel product;
+  Product product;
 
   /// Selected size of product; This can be null
   String? selectedSize;

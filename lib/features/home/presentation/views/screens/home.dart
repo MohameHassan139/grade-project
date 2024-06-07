@@ -1,8 +1,8 @@
 import 'package:ar_shopping/core/component/error_widget.dart';
 import 'package:ar_shopping/features/home/data/models/product.dart';
 import 'package:ar_shopping/features/card/presentation/view/widget/cart_appbar_action.dart';
-import 'package:ar_shopping/features/home/presentation/category/category_cubit.dart';
-import 'package:ar_shopping/features/home/presentation/offer_cubit/home_cubit_cubit.dart';
+import 'package:ar_shopping/features/home/presentation/model_view/category/category_cubit.dart';
+import 'package:ar_shopping/features/home/presentation/model_view/offer_cubit/home_cubit_cubit.dart';
 import 'package:ar_shopping/features/home/presentation/views/widgets/category_tile.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -67,11 +67,13 @@ class _HomePageState extends State<HomePage> {
                             shrinkWrap: true,
                             physics: const BouncingScrollPhysics(),
                             itemBuilder: (context, index) => CategoryTile(
-                              imageUrl: manLookRightImageUrl,
-                              category: state.categories.categories![index],
+                              imageUrl: state.categories.subCategories![index]
+                                  .images!.first.url!,
+                              category: state.categories.subCategories![index],
                               imageAlignment: Alignment.topCenter,
                             ),
-                            itemCount: state.categories.categories?.length ?? 0,
+                            itemCount:
+                                state.categories.subCategories?.length ?? 0,
                             separatorBuilder: (context, index) =>
                                 SizedBox(height: 16),
                           );
@@ -112,9 +114,3 @@ class _HomePageState extends State<HomePage> {
   }
 }
 
-const String manLookRightImageUrl =
-    'https://th.bing.com/th/id/OIP.ziNAhJV_iUGwYfttQpoD5QHaD3?w=1998&h=1045&rs=1&pid=ImgDetMain';
-const String dogImageUrl =
-    'https://www.homelane.com/blog/wp-content/uploads/2022/10/drawing-room-wall-tiles-450x313.jpg';
-const String womanLookLeftImageUrl =
-    'https://th.bing.com/th/id/R.fab962aefd58bd35734b02ef3569712f?rik=FfFsDUZScjERBg&pid=ImgRaw&r=0&sres=1&sresct=1';

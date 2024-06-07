@@ -18,6 +18,7 @@ class CategoryTile extends StatelessWidget {
   final String imageUrl;
   final Categories category;
 
+
   /// Which part of the image to prefer
   final Alignment imageAlignment;
 
@@ -33,12 +34,12 @@ class CategoryTile extends StatelessWidget {
               ),
         ),
         InkWell(
-          // onTap: () => pushScreen(
-          //   context: context,
-          //   screen: CategoryScreen(
-          //     // category: category,
-          //   ),
-          // ),
+          onTap: () => pushScreen(
+            context: context,
+            screen: CategoryScreen(
+              category: category,
+            ),
+          ),
           child: Container(
             height: 200,
             width: double.infinity,
