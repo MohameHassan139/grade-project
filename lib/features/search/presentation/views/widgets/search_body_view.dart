@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../auth/presentation/view/widgets/custom_textformfield.dart';
-import '../../view_models/fetch_search_books/fetch_search_books_cubit.dart';
+import '../../view_models/fetch_search_books/fetch_search_cubit.dart';
 
 class CustomSearchBody extends StatelessWidget {
   CustomSearchBody({super.key});

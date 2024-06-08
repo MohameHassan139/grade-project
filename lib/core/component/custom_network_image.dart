@@ -4,7 +4,7 @@ import 'package:shimmer/shimmer.dart';
 import '../utils/colors.dart';
 
 class CustomNetworkImage extends StatelessWidget {
-  CustomNetworkImage(
+  CustomNetworkImage( 
       {super.key, required this.imageUrl, this.width, this.height});
   double? width;
   double? height;

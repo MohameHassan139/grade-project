@@ -5,6 +5,6 @@ import '../../../home/data/models/product.dart';
 
 
 abstract class SearchRepo {
-  Future<Either<ProductsModel, Failuer>> fetchSearchedrBooks(
+  Future<Either<ProductsModel, Failuer>> fetchSearched(
       {required String category});
 }

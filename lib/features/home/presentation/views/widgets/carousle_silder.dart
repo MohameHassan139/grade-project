@@ -248,13 +248,13 @@ class _CustomCarousleSliderState extends State<CustomCarousleSlider> {
 
         final List<Widget> imageSliders = productModels.offers!
             .map((item) => InkWell(
-                  // onTap: () {
-                  //   pushScreen(
-                  //       // context: context,
-                  //       // screen: ProductScreen(
-                  //       //   product: item,
-                  //       // ));
-                  // },
+                  onTap: () {
+                    pushScreen(
+                        context: context,
+                        screen: ProductScreen(
+                          product: item,
+                        ));
+                  },
                   child: Container(
                     margin: const EdgeInsets.all(5.0),
                     child: ClipRRect(
@@ -264,7 +264,8 @@ class _CustomCarousleSliderState extends State<CustomCarousleSlider> {
                           children: <Widget>[
                             CustomNetworkImage(
                               width: width * .9,
-                              imageUrl: item.images?[0].url ?? '',
+                              imageUrl: item.images!.firstOrNull?.url ?? '',
+                              // imageUrl: '',
                             ),
                             // categrory
                             Positioned(

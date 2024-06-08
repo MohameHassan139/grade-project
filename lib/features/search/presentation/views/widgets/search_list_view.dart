@@ -5,10 +5,12 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../../../../core/component/error_widget.dart';
+import '../../../../../core/function/push_screen.dart';
 import '../../../../../core/utils/app_router.dart';
 import '../../../../../core/utils/styles.dart';
 
-import '../../view_models/fetch_search_books/fetch_search_books_cubit.dart';
+import '../../../../product_details/presentation/view/product_screen.dart';
+import '../../view_models/fetch_search_books/fetch_search_cubit.dart';
 
 class SearchListView extends StatelessWidget {
   const SearchListView({
@@ -28,8 +30,11 @@ class SearchListView extends StatelessWidget {
             ),
             itemBuilder: (context, index) => InkWell(
               onTap: () {
-                GoRouter.of(context).pushNamed(AppRoutNamed.bookDetails,
-                    extra: state.products.products![index]);
+                pushScreen(
+                    context: context,
+                    screen: ProductScreen(
+                      product: state.products.products![index],
+                    ));
               },
               child: BestSellerItem(
                 productModel: state.products.products![index],

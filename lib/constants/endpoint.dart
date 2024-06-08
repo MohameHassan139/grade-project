@@ -6,6 +6,7 @@ class ApiConstant {
   static const String subCategorytUrl =
       "${baseUrl}homePage/subCategoryProducts";
   static const String discountUrl = "${baseUrl}homePage/offers";
+  static const String search = "${baseUrl}search";
   // static const String discountUrl = "${baseUrl}homePage/offers";
 }
 // homePage/offers

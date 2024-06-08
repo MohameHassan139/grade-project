@@ -1,4 +1,4 @@
-part of 'fetch_search_books_cubit.dart';
+part of 'fetch_search_cubit.dart';
 
 sealed class FetchSearchProductsState {
   const FetchSearchProductsState();

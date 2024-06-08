@@ -26,7 +26,7 @@ class BestSellerItem extends StatelessWidget {
                 borderRadius: BorderRadius.circular(16),
               ),
               child: CustomNetworkImage(
-                  imageUrl: productModel.images?.first.url ?? ''),
+                  imageUrl: productModel.images!.firstOrNull?.url ?? ''),
             ),
           ),
           const SizedBox(
