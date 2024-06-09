@@ -264,7 +264,7 @@ class _CustomCarousleSliderState extends State<CustomCarousleSlider> {
                           children: <Widget>[
                             CustomNetworkImage(
                               width: width * .9,
-                              imageUrl: item.images!.firstOrNull?.url ?? '',
+                              imageUrl: item.images?.firstOrNull?.url ?? '',
                               // imageUrl: '',
                             ),
                             // categrory

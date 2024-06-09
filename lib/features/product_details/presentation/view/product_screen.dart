@@ -1,5 +1,3 @@
-
-
 import 'package:ar_shopping/constants/app_colors.dart';
 import 'package:ar_shopping/core/component/custom_body_bacground.dart';
 import 'package:ar_shopping/core/component/custom_botton.dart';
@@ -7,11 +5,17 @@ import 'package:ar_shopping/core/component/custom_network_image.dart';
 import 'package:ar_shopping/features/home/data/models/product.dart';
 import 'package:ar_shopping/features/card/presentation/view/widget/cart_appbar_action.dart';
 import 'package:ar_shopping/core/component/custom_appbar.dart';
+import 'package:ar_shopping/features/product_details/presentation/model_view/add_review_cubit/add_review_cubit.dart';
+import 'package:ar_shopping/features/product_details/presentation/model_view/rate_cubit/product_details_cubit.dart';
+import 'package:ar_shopping/features/product_details/presentation/view/widgets/custom_bottom_sheet.dart';
 import 'package:ar_shopping/features/product_details/presentation/view/widgets/feedback_list.dart';
 import 'package:ar_shopping/features/product_details/presentation/view/widgets/model_viewer.dart';
 import 'package:ar_shopping/features/product_details/presentation/view/widgets/rate_stare.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:shimmer/shimmer.dart';
 
+import '../../../../core/utils/colors.dart';
 import '../../../card/data/models/order_item.dart';
 import '../../../card/presentation/view/widget/cart_list.dart';
 import 'widgets/model_view_bottom.dart';
@@ -33,6 +37,8 @@ class _ProductScreenState extends State<ProductScreen> {
   void initState() {
     selectedImageUrl = (product.images?.firstOrNull?.url ?? "");
     selectedSize = product.size?[0] ?? "";
+    BlocProvider.of<ProductDetailsCubit>(context)
+        .getReview(id: product.id ?? 4);
     super.initState();
   }
 
@@ -51,6 +57,8 @@ class _ProductScreenState extends State<ProductScreen> {
   int modeView = 1;
   @override
   Widget build(BuildContext context) {
+    var cubit = BlocProvider.of<ProductDetailsCubit>(context);
+    // cubit.getReview(id: product.id ?? 3);
     final screenHight = MediaQuery.of(context).size.height;
     List<Widget> imagePreviews = product.images!
         .map(
@@ -116,7 +124,6 @@ class _ProductScreenState extends State<ProductScreen> {
             )
             .toList() ??
         [];
-
     Widget objectView(int x) {
       // ignore: curly_braces_in_flow_control_structures
       if (x == 1) {
@@ -238,7 +245,31 @@ class _ProductScreenState extends State<ProductScreen> {
                                 ),
                           ),
                           Spacer(),
-                          CustomRate(),
+                          BlocBuilder<ProductDetailsCubit, ReviewState>(
+                            builder: (context, state) {
+                              if (state is GetReviewSuccess) {
+                                return CustomRate(
+                                  rate: state.review,
+                                );
+                              } else if (state is GetReviewLoading) {
+                                return Shimmer.fromColors(
+                                  baseColor: AppColors.KshimmerBaseColor,
+                                  highlightColor:
+                                      AppColors.KshimmerHighlightColor,
+                                  child: Container(
+                                    height: 30,
+                                    width: 150,
+                                    color: Colors.grey,
+                                  ),
+                                );
+                              } else if (state is GetReviewFailure) {
+                                return Text('${state.error}');
+
+                                //  return Text('fucck off');
+                              }
+                              return Text('fucck off');
+                            },
+                          ),
                         ],
                       ),
                       const SizedBox(height: 12),
@@ -302,8 +333,33 @@ class _ProductScreenState extends State<ProductScreen> {
               ),
             ],
           ),
+                 
+                  
+              
+           
         ),
       ),
+      floatingActionButton: BlocBuilder<AddReviewCubit, AddReviewState>(
+        builder: (context, state) {
+          return FloatingActionButton(
+            backgroundColor: CustomColors.kPinkColor,
+            onPressed: () {
+              context.read<AddReviewCubit>().toggleBottomSheet();
+            },
+            child: Icon(
+              BlocProvider.of<AddReviewCubit>(context).bottomSheetClosed
+                  ? Icons.add_comment_outlined
+                  : Icons.close,
+            ),
+          );
+        },
+      ),
+      bottomSheet: CustomButtomSheet(
+        id: product.id!,
+      ),
+      
     );
   }
 }
+
+

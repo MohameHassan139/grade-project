@@ -7,6 +7,9 @@ class ApiConstant {
       "${baseUrl}homePage/subCategoryProducts";
   static const String discountUrl = "${baseUrl}homePage/offers";
   static const String search = "${baseUrl}search";
+  static const String review = "${baseUrl}review/show";
+  static const String addComment = "${baseUrl}comment/store";
+  static const String addRate = "${baseUrl}review/store";
   // static const String discountUrl = "${baseUrl}homePage/offers";
 }
 // homePage/offers

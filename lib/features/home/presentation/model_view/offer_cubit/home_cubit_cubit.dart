@@ -21,17 +21,5 @@ class HomeCubitCubit extends Cubit<HomeCubitState> {
     });
   }
 
-  // Future<void> getProducts() async {
-  //   emit(GetProductsLoading());
-  //   var value = await homeRepo.getProducts();
-  //   value.fold((products) async {
-  //     emit(GetProductsSuccess(products: products));
 
-  //     print(products);
-  //   }, (error) {
-  //     print(error.errorMessage);
-
-  //     emit(GetSpacialOfferFailure(error: error.errorMessage));
-  //   });
-  // }
 }

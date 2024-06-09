@@ -34,7 +34,7 @@ class User {
   String? email;
   dynamic address;
   dynamic phone;
-  List<dynamic>? image;
+  dynamic image;
 
   User({this.id, this.name, this.email, this.address, this.phone, this.image});
 
