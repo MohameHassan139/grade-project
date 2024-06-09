@@ -21,24 +21,25 @@ import '../../../card/presentation/view/widget/cart_list.dart';
 import 'widgets/model_view_bottom.dart';
 
 class ProductScreen extends StatefulWidget {
-  const ProductScreen({required this.product, Key? key}) : super(key: key);
-  final Product product;
+  ProductScreen({required this.product, Key? key}) : super(key: key);
+  Product product;
 
   @override
   State<ProductScreen> createState() => _ProductScreenState();
 }
 
 class _ProductScreenState extends State<ProductScreen> {
-  Product get product => widget.product;
+  // Product get product => widget.product;
+
   String? selectedImageUrl;
   String? selectedSize;
   Cart cart = Cart();
   @override
   void initState() {
-    selectedImageUrl = (product.images?.firstOrNull?.url ?? "");
-    selectedSize = product.size?[0] ?? "";
+    selectedImageUrl = (widget.product.images?.firstOrNull?.url ?? "");
+    selectedSize = widget.product.size?[0] ?? "";
     BlocProvider.of<ProductDetailsCubit>(context)
-        .getReview(id: product.id ?? 4);
+        .getReview(id: widget.product.id!);
     super.initState();
   }
 
@@ -60,7 +61,7 @@ class _ProductScreenState extends State<ProductScreen> {
     var cubit = BlocProvider.of<ProductDetailsCubit>(context);
     // cubit.getReview(id: product.id ?? 3);
     final screenHight = MediaQuery.of(context).size.height;
-    List<Widget> imagePreviews = product.images!
+    List<Widget> imagePreviews = widget.product.images!
         .map(
           (image) => Padding(
             padding: const EdgeInsets.symmetric(horizontal: 8.0),
@@ -88,7 +89,7 @@ class _ProductScreenState extends State<ProductScreen> {
         )
         .toList();
 
-    List<Widget> sizeSelectionWidgets = product.size
+    List<Widget> sizeSelectionWidgets = widget.product.size
             ?.map(
               (s) => Padding(
                 padding: const EdgeInsets.all(4.0),
@@ -153,7 +154,7 @@ class _ProductScreenState extends State<ProductScreen> {
           child: Text('Soon wait....'),
         );
       }
-      return ModelView();
+      return ModelView(obj: widget.product.object!);
     }
 
     return Scaffold(
@@ -165,178 +166,198 @@ class _ProductScreenState extends State<ProductScreen> {
         ],
       ),
       body: CustomBody(
-        child: SingleChildScrollView(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Container(
-                height: MediaQuery.of(context).size.height * .35,
-                color: CustomColors.kGreyBackground,
-                padding: const EdgeInsets.symmetric(vertical: 18),
-                child: objectView(modeView),
-              ),
-              Container(
-                width: double.infinity,
-                child: Padding(
-                  padding: const EdgeInsets.all(16),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Visibility(
-                        visible: product.object == null,
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        child: BlocListener<AddReviewCubit, AddReviewState>(
+          listener: (context, state) {
+            // if (state is GetCommentSccess) {
+            //   widget.product = BlocProvider.of<AddReviewCubit>(context)
+            //       .productUpdate!
+            //       .products!;
+            // }
+            if (state is GetCommentSccess) {
+              final productUpdate =
+                  BlocProvider.of<AddReviewCubit>(context).productUpdate;
+              if (productUpdate != null && productUpdate.products != null) {
+                setState(() {
+                  widget.product = productUpdate.products!;
+                });
+              }
+            }
+            if (state is onSubmitSccess) {
+              setState(() {});
+            }
+          },
+          child: SingleChildScrollView(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Container(
+                  height: MediaQuery.of(context).size.height * .35,
+                  color: CustomColors.kGreyBackground,
+                  padding: const EdgeInsets.symmetric(vertical: 18),
+                  child: objectView(modeView),
+                ),
+                Container(
+                  width: double.infinity,
+                  child: Padding(
+                    padding: const EdgeInsets.all(16),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Visibility(
+                          visible: widget.product.object!.length > 4,
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              ModelViewButtom(
+                                indexButtom: 1,
+                                selectedModel: modeView,
+                                onTap: () {
+                                  setState(() {
+                                    modeView = 1;
+                                  });
+                                },
+                                text: 'Image view',
+                              ),
+                              ModelViewButtom(
+                                indexButtom: 2,
+                                selectedModel: modeView,
+                                onTap: () {
+                                  setState(() {
+                                    modeView = 2;
+                                  });
+                                },
+                                text: '3d view',
+                              ),
+                              ModelViewButtom(
+                                indexButtom: 3,
+                                selectedModel: modeView,
+                                onTap: () {
+                                  setState(() {
+                                    modeView = 3;
+                                  });
+                                },
+                                text: 'AR view',
+                              ),
+                            ],
+                          ),
+                        ),
+                        SizedBox(
+                          height: 10,
+                        ),
+                        Text(
+                          widget.product.name ?? "name",
+                          style: Theme.of(context)
+                              .textTheme
+                              .titleLarge
+                              ?.copyWith(color: CustomColors.kGreyBackground),
+                        ),
+                        const SizedBox(
+                          height: 4,
+                        ),
+                        Row(
                           children: [
-                            ModelViewButtom(
-                              indexButtom: 1,
-                              selectedModel: modeView,
-                              onTap: () {
-                                setState(() {
-                                  modeView = 1;
-                                });
-                              },
-                              text: 'Image view',
+                            Text(
+                              '\$${widget.product.price}',
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .titleMedium!
+                                  .copyWith(
+                                    color: CustomColors.kCyanColor,
+                                  ),
                             ),
-                            ModelViewButtom(
-                              indexButtom: 2,
-                              selectedModel: modeView,
-                              onTap: () {
-                                setState(() {
-                                  modeView = 2;
-                                });
+                            Spacer(),
+                            BlocBuilder<ProductDetailsCubit, ReviewState>(
+                              builder: (context, state) {
+                                if (state is GetReviewSuccess) {
+                                  return CustomRate(
+                                    rate: state.review,
+                                  );
+                                } else if (state is GetReviewLoading) {
+                                  return Shimmer.fromColors(
+                                    baseColor: AppColors.KshimmerBaseColor,
+                                    highlightColor:
+                                        AppColors.KshimmerHighlightColor,
+                                    child: Container(
+                                      height: 30,
+                                      width: 150,
+                                      color: Colors.grey,
+                                    ),
+                                  );
+                                } else if (state is GetReviewFailure) {
+                                  return Text('${state.error}');
+
+                                  //  return Text('fucck off');
+                                }
+                                return Text('fucck off');
                               },
-                              text: '3d view',
-                            ),
-                            ModelViewButtom(
-                              indexButtom: 3,
-                              selectedModel: modeView,
-                              onTap: () {
-                                setState(() {
-                                  modeView = 3;
-                                });
-                              },
-                              text: 'AR view',
                             ),
                           ],
                         ),
-                      ),
-                      SizedBox(
-                        height: 10,
-                      ),
-                      Text(
-                        product.name ?? "name",
-                        style: Theme.of(context)
-                            .textTheme
-                            .titleLarge
-                            ?.copyWith(color: CustomColors.kGreyBackground),
-                      ),
-                      const SizedBox(
-                        height: 4,
-                      ),
-                      Row(
-                        children: [
-                          Text(
-                            '\$${product.price}',
-                            style: Theme.of(context)
-                                .textTheme
-                                .titleMedium!
-                                .copyWith(
-                                  color: CustomColors.kCyanColor,
-                                ),
-                          ),
-                          Spacer(),
-                          BlocBuilder<ProductDetailsCubit, ReviewState>(
-                            builder: (context, state) {
-                              if (state is GetReviewSuccess) {
-                                return CustomRate(
-                                  rate: state.review,
-                                );
-                              } else if (state is GetReviewLoading) {
-                                return Shimmer.fromColors(
-                                  baseColor: AppColors.KshimmerBaseColor,
-                                  highlightColor:
-                                      AppColors.KshimmerHighlightColor,
-                                  child: Container(
-                                    height: 30,
-                                    width: 150,
-                                    color: Colors.grey,
-                                  ),
-                                );
-                              } else if (state is GetReviewFailure) {
-                                return Text('${state.error}');
-
-                                //  return Text('fucck off');
-                              }
-                              return Text('fucck off');
-                            },
-                          ),
-                        ],
-                      ),
-                      const SizedBox(height: 12),
-                      Text(
-                        product.description ??
-                            'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer quis purus laoreet, efficitur libero vel, feugiat ante. Vestibulum tempor, ligula Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer quis purus laoreet, efficitur libero vel, feugiat ante. Vestibulum tempor, ligula.',
-                        style: Theme.of(context).textTheme.bodyMedium!.copyWith(
-                            height: 1.5, color: CustomColors.kWhiteColor),
-                      ),
-                      const SizedBox(
-                        height: 18,
-                      ),
-                      if (sizeSelectionWidgets.isNotEmpty) ...[
+                        const SizedBox(height: 12),
                         Text(
-                          'Size',
+                          widget.product.description ??
+                              'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer quis purus laoreet, efficitur libero vel, feugiat ante. Vestibulum tempor, ligula Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer quis purus laoreet, efficitur libero vel, feugiat ante. Vestibulum tempor, ligula.',
                           style: Theme.of(context)
                               .textTheme
-                              .titleSmall
-                              ?.copyWith(color: CustomColors.kGreenColor),
+                              .bodyMedium!
+                              .copyWith(
+                                  height: 1.5, color: CustomColors.kWhiteColor),
                         ),
-                        const SizedBox(height: 8),
+                        const SizedBox(
+                          height: 18,
+                        ),
+                        if (sizeSelectionWidgets.isNotEmpty) ...[
+                          Text(
+                            'Size',
+                            style: Theme.of(context)
+                                .textTheme
+                                .titleSmall
+                                ?.copyWith(color: CustomColors.kGreenColor),
+                          ),
+                          const SizedBox(height: 8),
+                          Center(
+                            child: Wrap(
+                              alignment: WrapAlignment.center,
+                              children: sizeSelectionWidgets,
+                            ),
+                          ),
+                        ],
+                        const SizedBox(
+                          height: 20,
+                        ),
                         Center(
-                          child: Wrap(
-                            alignment: WrapAlignment.center,
-                            children: sizeSelectionWidgets,
+                          child: CustomBottom(
+                            screenHight: screenHight,
+                            onTap: () {
+                              setState(() {
+                                cart.add(
+                                  OrderItem(
+                                    product: widget.product,
+                                    selectedSize: selectedSize,
+                                  ),
+                                );
+                              });
+                            },
+                            text: 'Add to Cart',
                           ),
                         ),
-                      ],
-                      const SizedBox(
-                        height: 20,
-                      ),
-                      Center(
-                        child: CustomBottom(
-                          screenHight: screenHight,
-                          onTap: () {
-                            setState(() {
-                              cart.add(
-                                OrderItem(
-                                  product: product,
-                                  selectedSize: selectedSize,
-                                ),
-                              );
-                            });
-                          },
-                          text: 'Add to Cart',
+                        Text(
+                          'feedbacks',
+                          style: Theme.of(context)
+                              .textTheme
+                              .bodyLarge
+                              ?.copyWith(color: CustomColors.kGreyBackground),
                         ),
-                      ),
-                      Text(
-                        'feedbacks',
-                        style: Theme.of(context)
-                            .textTheme
-                            .bodyLarge
-                            ?.copyWith(color: CustomColors.kGreyBackground),
-                      ),
-                      FeedbackList(
-                        comments: product.comments ?? [],
-                      ),
-                    ],
+                        FeedbackList(
+                          comments: widget.product.comments ?? [],
+                        ),
+                      ],
+                    ),
                   ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
-                 
-                  
-              
-           
         ),
       ),
       floatingActionButton: BlocBuilder<AddReviewCubit, AddReviewState>(
@@ -355,11 +376,8 @@ class _ProductScreenState extends State<ProductScreen> {
         },
       ),
       bottomSheet: CustomButtomSheet(
-        id: product.id!,
+        id: widget.product.id!,
       ),
-      
     );
   }
 }
-
-

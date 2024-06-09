@@ -13,6 +13,9 @@ class CustomTextFormField extends StatelessWidget {
   bool? ispassword = false;
   void Function()? onTap;
   bool? readOnly = false;
+  bool? expands = false;
+  int? maxLines;
+  int? minLines;
   CustomTextFormField({
     key,
     this.textController,
@@ -25,12 +28,18 @@ class CustomTextFormField extends StatelessWidget {
     required this.labelText,
     this.prefixIcon,
     this.readOnly,
+    this.expands,
+    this.maxLines,
+    this.minLines,
   });
 
   @override
   Widget build(BuildContext context) {
     return Container(
       child: TextFormField(
+        expands: expands ?? false,
+        minLines: minLines,
+        maxLines: maxLines,
         keyboardAppearance: Brightness.dark,
         onTap: onTap,
         keyboardType: fieldType,

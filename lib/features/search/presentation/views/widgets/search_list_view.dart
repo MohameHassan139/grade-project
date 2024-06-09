@@ -22,7 +22,7 @@ class SearchListView extends StatelessWidget {
     return BlocBuilder<FetchSearchProuductsCubit, FetchSearchProductsState>(
         builder: (context, state) {
       if (state is FetchSearchSuccess) {
-        if (state.products.products != null) {
+        if (state.products.products!.length > 0) {
           return ListView.separated(
             itemCount: state.products.products?.length ?? 0,
             separatorBuilder: (context, index) => const SizedBox(

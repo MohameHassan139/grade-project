@@ -34,3 +34,13 @@ final class onSubmitLoading extends AddReviewState {}
 final class onSubmitSccess extends AddReviewState {}
 
 final class onSubmitFailure extends AddReviewState {}
+
+
+final class GetCommentLoading extends AddReviewState {}
+
+final class GetCommentSccess extends AddReviewState {}
+
+final class GetCommentFailure extends AddReviewState {
+  String error;
+  GetCommentFailure({required this.error});
+}

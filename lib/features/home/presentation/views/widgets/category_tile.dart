@@ -49,10 +49,7 @@ class CategoryTile extends StatelessWidget {
             clipBehavior: Clip.antiAlias,
             child: CustomNetworkImage(
               imageUrl: imageUrl,
-              // color: CustomColors.kGreyBackground,
-              // colorBlendMode: BlendMode.darken,
-              // alignment: imageAlignment,
-              // fit: BoxFit.fill,
+              
             ),
           ),
         ),

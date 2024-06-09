@@ -69,26 +69,38 @@ class CustomNetworkImage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return CachedNetworkImage(
-      width: width,
-      height: height,
-      fit: BoxFit.cover,
-      imageUrl: imageUrl,
-      placeholder: (context, url) => Shimmer.fromColors(
-        baseColor: AppColors.KshimmerBaseColor,
-        highlightColor: AppColors.KshimmerHighlightColor,
-        child: Container(
-          color: Colors.grey,
-        ),
-      ),
-      errorWidget: (context, url, error) => Container(
-        color: Colors.grey,
-        child: Center(
-          child: Icon(
-            Icons.error,
-            size: 40,
-            color: Colors.red,
+    if (imageUrl.length > 5) {
+      return CachedNetworkImage(
+        width: width,
+        height: height,
+        fit: BoxFit.cover,
+        imageUrl: imageUrl,
+        placeholder: (context, url) => Shimmer.fromColors(
+          baseColor: AppColors.KshimmerBaseColor,
+          highlightColor: AppColors.KshimmerHighlightColor,
+          child: Container(
+            color: Colors.grey,
           ),
+        ),
+        errorWidget: (context, url, error) => Container(
+          color: Colors.grey,
+          child: const Center(
+            child: Icon(
+              Icons.error_outline,
+              size: 40,
+              color: Colors.red,
+            ),
+          ),
+        ),
+      );
+    }
+    return Container(
+      color: Colors.grey,
+      child: const Center(
+        child: Icon(
+          Icons.hide_image_outlined,
+          size: 40,
+          color: Color.fromARGB(83, 14, 13, 13),
         ),
       ),
     );

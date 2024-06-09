@@ -33,7 +33,7 @@ class Product {
     String? priceAfterOffer;
     List<String>? size;
     List<Images>? images;
-    List<Object>? object;
+  String? object;
     List<Comments>? comments;
 
     Product({this.id, this.name, this.description, this.price, this.offer, this.priceAfterOffer, this.size, this.images, this.object, this.comments});
@@ -47,7 +47,7 @@ class Product {
         priceAfterOffer = json["price_after_offer"];
         size = json["size"] == null ? null : List<String>.from(json["size"]);
         images = json["images"] == null ? null : (json["images"] as List).map((e) => Images.fromJson(e)).toList();
-        object = json["object"] == null ? null : (json["object"] as List).map((e) => Object.fromJson(e)).toList();
+    object = json["object"];
         comments = json["comments"] == null ? null : (json["comments"] as List).map((e) => Comments.fromJson(e)).toList();
     }
 
@@ -70,7 +70,7 @@ class Product {
             _data["images"] = images?.map((e) => e.toJson()).toList();
         }
         if(object != null) {
-            _data["object"] = object?.map((e) => e.toJson()).toList();
+      _data["object"] = object;
         }
         if(comments != null) {
             _data["comments"] = comments?.map((e) => e.toJson()).toList();

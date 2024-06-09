@@ -10,6 +10,8 @@ class ApiConstant {
   static const String review = "${baseUrl}review/show";
   static const String addComment = "${baseUrl}comment/store";
   static const String addRate = "${baseUrl}review/store";
+  static const String showComment = "${baseUrl}comment/show";
   // static const String discountUrl = "${baseUrl}homePage/offers";
 }
 // homePage/offers
+// comment/show  review/store

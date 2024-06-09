@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:ffi';
 
 import 'package:ar_shopping/core/errors/failures.dart';
+import 'package:ar_shopping/features/product_details/data/models/after_add_comment_model.dart';
 
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
@@ -56,12 +57,32 @@ class ProductRepoImpl implements ProductRepo {
   Future<Either<void, Failuer>> addProductRate(
       {required int id, required double rate}) async {
     try {
-      var data = await ApiService.api
-          .post(quray: "${ApiConstant.addComment}/$id", data: {
+      var data =
+          await ApiService.api.post(quray: "${ApiConstant.addRate}/$id", data: {
         "review": rate,
       });
 
       return left(data);
+    } catch (e) {
+      if (e is DioException) {
+        return right(ServerFailuer.fromDioError(dioException: e));
+      }
+      return right(ServerFailuer(errorMessage: e.toString()));
+    }
+  }
+
+  @override
+  Future<Either<ProductUpdate, Failuer>> getProductAfterComment(
+      {required int id}) async {
+    try {
+      var data = await ApiService.api.get(
+        quray: "${ApiConstant.showComment}/$id",
+      );
+      ProductUpdate model = ProductUpdate.fromJson(data);
+      print("<<<<<<<<<<<GetCommentSccess>>>>>>>>>>>>>>");
+      print(model.products?.toJson());
+
+      return left(model);
     } catch (e) {
       if (e is DioException) {
         return right(ServerFailuer.fromDioError(dioException: e));
