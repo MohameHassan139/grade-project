@@ -4,7 +4,7 @@ import 'package:meta/meta.dart';
 
 import '../../../../card/presentation/view/screen_cart.dart';
 import '../../../../home/presentation/views/screens/home.dart';
-import '../../../../profile/profile.dart';
+import '../../../../profile/presentation/view/profile.dart';
 import '../../../../search/presentation/views/search_view.dart';
 
 

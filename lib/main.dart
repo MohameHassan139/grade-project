@@ -4,6 +4,8 @@ import 'package:ar_shopping/features/home/presentation/model_view/offer_cubit/ho
 import 'package:ar_shopping/features/payment/data/repo/payment_repo_impl.dart';
 import 'package:ar_shopping/features/payment/presentation/view_model/init_payment_cubit/init_payment_cubit.dart';
 import 'package:ar_shopping/features/product_details/presentation/model_view/add_review_cubit/add_review_cubit.dart';
+import 'package:ar_shopping/features/profile/data/repo/profile_repo_impl.dart';
+import 'package:ar_shopping/features/profile/presentation/model_view/cubit/profile_cubit.dart';
 import 'package:ar_shopping/features/search/presentation/view_models/fetch_search_books/fetch_search_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -79,6 +81,11 @@ class MyApp extends StatelessWidget {
           create: (context) =>
               AddReviewCubit(productRepo: getIt.get<ProductRepoImpl>()),
         ),
+        BlocProvider<ProfileCubit>(
+          create: (context) =>
+              ProfileCubit(profileRepo: getIt.get<ProfileRepoImpl>())
+                ..getProfile(),
+        ),
       ],
       child: MaterialApp(
         title: 'Flutter Demo',
@@ -98,4 +105,4 @@ class MyApp extends StatelessWidget {
     );
   }
 }
-// BottomNavBarCubitCubit
+// ProfileCubit

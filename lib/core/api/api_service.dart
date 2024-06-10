@@ -13,8 +13,6 @@ class ApiService {
     Response response = await _dio.get(
       quray,
     );
-    print(CacheHelper.prefs?.getString('token'));
-    print('<<<<<<<.............>>>>>>>');
     return response.data;
   }
 
@@ -24,6 +22,19 @@ class ApiService {
     Object? data,
   }) async {
     Response response = await _dio.post(
+      quray,
+      data: data,
+    );
+
+    return response.data;
+  }
+
+  Future<Map<String, dynamic>> put({
+    required String quray,
+    String? token,
+    Object? data,
+  }) async {
+    Response response = await _dio.put(
       quray,
       data: data,
     );

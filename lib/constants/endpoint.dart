@@ -11,6 +11,10 @@ class ApiConstant {
   static const String addComment = "${baseUrl}comment/store";
   static const String addRate = "${baseUrl}review/store";
   static const String showComment = "${baseUrl}comment/show";
+  static const String delete = "${baseUrl}profile/delete";
+  static const String Logout = "${baseUrl}profile/logout";
+  static const String update = "${baseUrl}profile/update";
+  static const String getCurrentUser = "${baseUrl}profile/getCurrentUser";
   // static const String discountUrl = "${baseUrl}homePage/offers";
 }
 // homePage/offers
