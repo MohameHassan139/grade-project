@@ -22,6 +22,7 @@ import 'features/home/presentation/model_view/cubit/sub_category_cubit.dart';
 import 'features/product_details/data/repo/product_details_repo_impl.dart';
 import 'features/product_details/presentation/model_view/rate_cubit/product_details_cubit.dart';
 import 'features/search/data/repos/search_repo_impl.dart';
+import 'features/splash/presentation/views/splash_view.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -96,11 +97,11 @@ class MyApp extends StatelessWidget {
         ),
         debugShowCheckedModeBanner: false,
 
-        home: CacheHelper.prefs?.getString('token') == null
-            ? LoginPage()
-            : BottomNavBarView(),
+        // home: CacheHelper.prefs!.getString('token')!.length > 0
+        //     ? BottomNavBarView()
+        //     : LoginPage(),
         // home: BottomNavBarView(),
-        // home: LoginPage(),
+        home: SplashView(),
       ),
     );
   }

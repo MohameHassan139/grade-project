@@ -124,7 +124,7 @@ class LoginPage extends StatelessWidget {
                         ),
                         CustomBottom(
                           screenHight: screenHight,
-                          isloading: state is LoginLoading ? false : true,
+                          isloading: !cubit.isloading,
                           text: 'Login',
                           onTap: () {
                             if (_formKey.currentState!.validate()) {
@@ -133,17 +133,22 @@ class LoginPage extends StatelessWidget {
                                       email: cubit.emailController.text,
                                       password: cubit.passwordController.text)
                                   .then((_) {
-                                if (cubit.model!.token != null) {
-                                  pushScreen(
+                                if (cubit.model?.token != null) {
+                                  pushAndRemoveUntil(
                                       context: context,
                                       screen: BottomNavBarView());
                                 } else {
                                   ScaffoldMessenger.of(context)
                                       .showSnackBar(SnackBar(
                                     content:
-                                        Text(cubit.model?.message ?? 'null'),
+                                        Text(cubit.model!.message ?? 'null'),
                                   ));
                                 }
+                              }).catchError((error) {
+                                ScaffoldMessenger.of(context)
+                                    .showSnackBar(SnackBar(
+                                  content: Text(error.toString() ?? 'null'),
+                                ));
                               });
                             }
                             if (state is LoginFailure) {

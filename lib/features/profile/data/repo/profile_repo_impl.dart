@@ -8,13 +8,17 @@ import 'package:dio/dio.dart';
 import '../../../../constants/endpoint.dart';
 import '../../../../core/api/api_service.dart';
 import '../../../auth/data/models/auth_model.dart';
+import '../models/update_user.dart';
 
 class ProfileRepoImpl extends ProfileRepo {
   @override
   Future<Either<void, Failuer>> deletAccount() async {
     try {
-      var data = await ApiService.api.post(
+      var data = await ApiService.api.delete(
         quray: ApiConstant.delete,
+        data: {
+        "_method": "delete",
+      }
       );
 
       return left(data);
@@ -62,9 +66,10 @@ class ProfileRepoImpl extends ProfileRepo {
 
   @override
   Future<Either<UpdateProfile, Failuer>> updateProfile(
-      {required User model}) async {
+      {required UpdateUser model}) async {
     try {
       var data = await ApiService.api.put(
+        
         quray: ApiConstant.update,
         data: model.toJson(),
       );

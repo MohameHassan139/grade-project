@@ -26,7 +26,9 @@ class RegisterCubit extends Cubit<RegisterState> {
     userData = dataHandle();
     var result = await authRepo.register(userData: userData!);
     result.fold((success) {
-      CacheHelper.prefs?.setString('token', success.token!);
+      if (success.token!.isNotEmpty) {
+        CacheHelper.prefs?.setString('token', success.token!);
+      }
       model = success;
       emit(RegisterSuccess(model: success));
     }, (failure) {

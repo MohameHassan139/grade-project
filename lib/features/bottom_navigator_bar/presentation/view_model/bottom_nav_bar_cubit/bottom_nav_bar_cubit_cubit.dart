@@ -4,6 +4,7 @@ import 'package:meta/meta.dart';
 
 import '../../../../card/presentation/view/screen_cart.dart';
 import '../../../../home/presentation/views/screens/home.dart';
+import '../../../../notification/notification.dart';
 import '../../../../profile/presentation/view/profile.dart';
 import '../../../../search/presentation/views/search_view.dart';
 
@@ -18,7 +19,7 @@ class BottomNavBarCubit extends Cubit<BottomNavBarCubitState> {
     SearchView(),
     CartScreen(),
     HomePage(),
-    HomePage(),
+    NotificationPage(),
     ProfileView(),
     
   ];

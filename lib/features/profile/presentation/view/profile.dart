@@ -1,5 +1,7 @@
 import 'package:ar_shopping/core/function/push_screen.dart';
+import 'package:ar_shopping/features/auth/presentation/view/screens/login_page.dart';
 import 'package:ar_shopping/features/profile/presentation/view/edit_profile_view.dart';
+import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:flutter/cupertino.dart';
 
 import 'package:ar_shopping/constants/app_colors.dart';
@@ -37,7 +39,7 @@ class ProfileView extends StatelessWidget {
                       return const ProfileShimmerLoading();
                     }
                     return BuildProfileContent(
-                      model: cubit.profileModel,
+                      model: cubit.profileModel!,
                     );
                   },
                 ),
@@ -89,7 +91,20 @@ class ProfileView extends StatelessWidget {
                   margin: const EdgeInsets.all(8.0),
                   child: ElevatedButton(
                     onPressed: () {
-                      // Add your onPressed code here
+                      AwesomeDialog(
+                        context: context,
+                        dialogType: DialogType.question,
+                        animType: AnimType.rightSlide,
+                        title: 'Logout ',
+                        desc: 'Are you sure you want to log out ',
+                        btnCancelOnPress: () {},
+                        btnOkOnPress: () {
+                          cubit.logout().then((_) {
+                            pushAndRemoveUntil(
+                                context: context, screen: LoginPage());
+                          });
+                        },
+                      ).show();
                     },
                     style: ElevatedButton.styleFrom(
                       backgroundColor: Colors.red,
@@ -125,7 +140,20 @@ class ProfileView extends StatelessWidget {
                   margin: const EdgeInsets.all(8.0),
                   child: ElevatedButton(
                     onPressed: () {
-                      // Add your onPressed code here
+                      AwesomeDialog(
+                        context: context,
+                        dialogType: DialogType.warning,
+                        animType: AnimType.rightSlide,
+                        title: 'Delete Account',
+                        desc: 'Are you sure you want delete this account',
+                        btnCancelOnPress: () {},
+                        btnOkOnPress: () {
+                          cubit.deleteAccount().then((_) {
+                            pushAndRemoveUntil(
+                                context: context, screen: LoginPage());
+                          });
+                        },
+                      ).show();
                     },
                     style: ElevatedButton.styleFrom(
                       backgroundColor: Colors.red,

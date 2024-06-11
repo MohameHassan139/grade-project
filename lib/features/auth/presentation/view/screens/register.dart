@@ -13,7 +13,7 @@ import '../../../../../core/component/custom_botton.dart';
 import '../widgets/custom_textformfield.dart';
 import '../widgets/gadien_text.dart';
 import 'package:form_validator/form_validator.dart';
-
+import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 class RegisterPage extends StatelessWidget {
   final _formKey = GlobalKey<FormState>();
 
@@ -58,182 +58,196 @@ class RegisterPage extends StatelessWidget {
                   padding: const EdgeInsets.all(20.0),
                   child: Form(
                     key: _formKey,
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        SizedBox(
-                          height: screenHight * 0.05,
-                        ),
-                        CustomTextFormField(
-                          labelText: "name",
-                          textController: cubit.nameController,
-                          fieldType: TextInputType.name,
-                          prefixIcon: const Icon(
-                            Icons.person_rounded,
-                            color: CustomColors.kPinkColor,
+                    child: AnimationLimiter(
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: AnimationConfiguration.toStaggeredList(
+                          duration: const Duration(milliseconds: 375),
+                          childAnimationBuilder: (widget) => SlideAnimation(
+                            horizontalOffset: 50.0,
+                            child: FadeInAnimation(
+                              child: widget,
+                            ),
                           ),
-                          validator: ValidationBuilder()
-                              .minLength(
-                                  3, 'Name must be at least 3 characters')
-                              .build(),
-                        ),
-                        SizedBox(
-                          height: screenHight * 0.03,
-                        ),
-                        CustomTextFormField(
-                          labelText: "phone",
-                          textController: cubit.phoneController,
-                          fieldType: TextInputType.phone,
-                          prefixIcon: const Icon(
-                            Icons.phone,
-                            color: CustomColors.kPinkColor,
-                          ),
-                          validator: ValidationBuilder()
-                              .phone('Enter a valid phone number')
-                              .build(),
-                        ),
-                        SizedBox(
-                          height: screenHight * 0.03,
-                        ),
-                        CustomTextFormField(
-                          labelText: "email",
-                          textController: cubit.emailController,
-                          fieldType: TextInputType.emailAddress,
-                          prefixIcon: const Icon(
-                            Icons.email,
-                            color: CustomColors.kPinkColor,
-                          ),
-                          validator: ValidationBuilder()
-                              .email('Enter a valid email address')
-                              .build(),
-                        ),
-                        SizedBox(
-                          height: screenHight * 0.03,
-                        ),
-                        Container(
-                          width: double.infinity,
-                          child: Row(
-                            children: [
-                              Expanded(
-                                child: CustomTextFormField(
-                                  labelText: "Password",
-                                  textController: cubit.passwordController,
-                                  prefixIcon: const Icon(
-                                    Icons.lock_outline,
-                                    color: CustomColors.kPinkColor,
-                                  ),
-                                  ispassword: cubit.showPassword,
-                                  suffix: IconButton(
-                                    icon: Visibility(
-                                      replacement: const Icon(
-                                        Icons.password,
-                                        color: CustomColors.kPinkColor,
-                                      ),
-                                      visible: cubit.showPassword,
-                                      child: const Icon(
-                                        Icons.remove_red_eye,
-                                        color: CustomColors.kPinkColor,
-                                      ),
-                                    ),
-                                    onPressed: cubit.isShown,
-                                  ),
-                                  validator: ValidationBuilder()
-                                      .minLength(6,
-                                          'Password must be at least 6 characters')
-                                      .build(),
-                                ),
+                         
+                          children: [
+                            SizedBox(
+                              height: screenHight * 0.05,
+                            ),
+                            CustomTextFormField(
+                              labelText: "name",
+                              textController: cubit.nameController,
+                              fieldType: TextInputType.name,
+                              prefixIcon: const Icon(
+                                Icons.person_rounded,
+                                color: CustomColors.kPinkColor,
                               ),
-                              const SizedBox(
-                                width: 8,
+                              validator: ValidationBuilder()
+                                  .minLength(
+                                      3, 'Name must be at least 3 characters')
+                                  .build(),
+                            ),
+                            SizedBox(
+                              height: screenHight * 0.03,
+                            ),
+                            CustomTextFormField(
+                              labelText: "phone",
+                              textController: cubit.phoneController,
+                              fieldType: TextInputType.phone,
+                              prefixIcon: const Icon(
+                                Icons.phone,
+                                color: CustomColors.kPinkColor,
                               ),
-                              Expanded(
-                                child: CustomTextFormField(
-                                  textController:
-                                      cubit.comfirmPasswordController,
-                                  labelText: "confirm Password",
-                                  prefixIcon: const Icon(
-                                    Icons.lock_outline,
-                                    color: CustomColors.kPinkColor,
-                                  ),
-                                  ispassword: cubit.showPassword,
-                                  suffix: IconButton(
-                                    icon: Visibility(
-                                      replacement: const Icon(
-                                        Icons.password,
+                              validator: ValidationBuilder()
+                                  .phone('Enter a valid phone number')
+                                  .build(),
+                            ),
+                            SizedBox(
+                              height: screenHight * 0.03,
+                            ),
+                            CustomTextFormField(
+                              labelText: "email",
+                              textController: cubit.emailController,
+                              fieldType: TextInputType.emailAddress,
+                              prefixIcon: const Icon(
+                                Icons.email,
+                                color: CustomColors.kPinkColor,
+                              ),
+                              validator: ValidationBuilder()
+                                  .email('Enter a valid email address')
+                                  .build(),
+                            ),
+                            SizedBox(
+                              height: screenHight * 0.03,
+                            ),
+                            Container(
+                              width: double.infinity,
+                              child: Row(
+                                children: [
+                                  Expanded(
+                                    child: CustomTextFormField(
+                                      labelText: "Password",
+                                      textController: cubit.passwordController,
+                                      prefixIcon: const Icon(
+                                        Icons.lock_outline,
                                         color: CustomColors.kPinkColor,
                                       ),
-                                      visible: cubit.showPassword,
-                                      child: const Icon(
-                                        Icons.remove_red_eye,
-                                        color: CustomColors.kPinkColor,
+                                      ispassword: cubit.showPassword,
+                                      suffix: IconButton(
+                                        icon: Visibility(
+                                          replacement: const Icon(
+                                            Icons.password,
+                                            color: CustomColors.kPinkColor,
+                                          ),
+                                          visible: cubit.showPassword,
+                                          child: const Icon(
+                                            Icons.remove_red_eye,
+                                            color: CustomColors.kPinkColor,
+                                          ),
+                                        ),
+                                        onPressed: cubit.isShown,
                                       ),
+                                      validator: ValidationBuilder()
+                                          .minLength(6,
+                                              'Password must be at least 6 characters')
+                                          .build(),
                                     ),
-                                    onPressed: cubit.isShown,
                                   ),
-                                  validator: (value) {
-                                    if (value !=
-                                        cubit.passwordController.text) {
-                                      return 'Passwords do not match';
+                                  const SizedBox(
+                                    width: 8,
+                                  ),
+                                  Expanded(
+                                    child: CustomTextFormField(
+                                      textController:
+                                          cubit.comfirmPasswordController,
+                                      labelText: "confirm Password",
+                                      prefixIcon: const Icon(
+                                        Icons.lock_outline,
+                                        color: CustomColors.kPinkColor,
+                                      ),
+                                      ispassword: cubit.showPassword,
+                                      suffix: IconButton(
+                                        icon: Visibility(
+                                          replacement: const Icon(
+                                            Icons.password,
+                                            color: CustomColors.kPinkColor,
+                                          ),
+                                          visible: cubit.showPassword,
+                                          child: const Icon(
+                                            Icons.remove_red_eye,
+                                            color: CustomColors.kPinkColor,
+                                          ),
+                                        ),
+                                        onPressed: cubit.isShown,
+                                      ),
+                                      validator: (value) {
+                                        if (value !=
+                                            cubit.passwordController.text) {
+                                          return 'Passwords do not match';
+                                        }
+                                        return null;
+                                      },
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                            SizedBox(
+                              height: screenHight * 0.03,
+                            ),
+                            CustomTextFormField(
+                              labelText: "location",
+                              textController: cubit.addressController,
+                              fieldType: TextInputType.text,
+                              prefixIcon: const Icon(
+                                Icons.location_on_outlined,
+                                color: CustomColors.kPinkColor,
+                              ),
+                              validator: ValidationBuilder()
+                                  .minLength(3,
+                                      'Location must be at least 3 characters')
+                                  .build(),
+                            ),
+                            SizedBox(
+                              height: screenHight * 0.03,
+                            ),
+                            SizedBox(
+                              height: screenHight * 0.04,
+                            ),
+                            CustomBottom(
+                              screenHight: screenHight,
+                              isloading:
+                                  state is RegisterLoading ? false : true,
+                              text: 'Register',
+                              onTap: () {
+                                if (_formKey.currentState!.validate()) {
+                                  cubit.register().then((_) {
+                                    if (cubit.model!.token != null) {
+                                      pushAndRemoveUntil(
+                                        context: context,
+                                        screen: BottomNavBarView(),
+                                      );
+                                    } else {
+                                      ScaffoldMessenger.of(context)
+                                          .showSnackBar(SnackBar(
+                                        content: Text(
+                                            cubit.model?.message ?? 'null'),
+                                      ));
                                     }
-                                    return null;
-                                  },
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                        SizedBox(
-                          height: screenHight * 0.03,
-                        ),
-                        CustomTextFormField(
-                          labelText: "location",
-                          textController: cubit.addressController,
-                          fieldType: TextInputType.text,
-                          prefixIcon: const Icon(
-                            Icons.location_on_outlined,
-                            color: CustomColors.kPinkColor,
-                          ),
-                          validator: ValidationBuilder()
-                              .minLength(
-                                  3, 'Location must be at least 3 characters')
-                              .build(),
-                        ),
-                        SizedBox(
-                          height: screenHight * 0.03,
-                        ),
-                        SizedBox(
-                          height: screenHight * 0.04,
-                        ),
-                        CustomBottom(
-                          screenHight: screenHight,
-                          isloading: state is RegisterLoading ? false : true,
-                          text: 'Register',
-                          onTap: () {
-                            if (_formKey.currentState!.validate()) {
-                              cubit.register().then((_) {
-                                if (cubit.model!.token != null) {
-                                  pushScreen(
-                                    context: context,
-                                    screen: BottomNavBarView(),
-                                  );
-                                } else {
+                                  });
+                                }
+                                if (state is RegisterFailure) {
                                   ScaffoldMessenger.of(context)
                                       .showSnackBar(SnackBar(
-                                    content:
-                                        Text(cubit.model?.message ?? 'null'),
+                                    content: Text(state.error),
                                   ));
                                 }
-                              });
-                            }
-                            if (state is RegisterFailure) {
-                              ScaffoldMessenger.of(context)
-                                  .showSnackBar(SnackBar(
-                                content: Text(state.error),
-                              ));
-                            }
-                          },
+                              },
+                            ),
+                          ],
+                     
                         ),
-                      ],
+                      ),
                     ),
                   ),
                 ),

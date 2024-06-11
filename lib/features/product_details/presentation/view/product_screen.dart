@@ -168,11 +168,7 @@ class _ProductScreenState extends State<ProductScreen> {
       body: CustomBody(
         child: BlocListener<AddReviewCubit, AddReviewState>(
           listener: (context, state) {
-            // if (state is GetCommentSccess) {
-            //   widget.product = BlocProvider.of<AddReviewCubit>(context)
-            //       .productUpdate!
-            //       .products!;
-            // }
+           
             if (state is GetCommentSccess) {
               final productUpdate =
                   BlocProvider.of<AddReviewCubit>(context).productUpdate;

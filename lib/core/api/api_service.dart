@@ -19,24 +19,41 @@ class ApiService {
   Future<Map<String, dynamic>> post({
     required String quray,
     String? token,
+    String? contentType,
     Object? data,
   }) async {
     Response response = await _dio.post(
+      quray,
+      data: data,
+      options: Options(
+        contentType: contentType,
+      ),
+    );
+
+    return response.data;
+  }
+  Future<Map<String, dynamic>> delete({
+    required String quray,
+    Object? data,
+  }) async {
+    Response response = await _dio.delete(
       quray,
       data: data,
     );
 
     return response.data;
   }
-
   Future<Map<String, dynamic>> put({
     required String quray,
-    String? token,
+   
     Object? data,
   }) async {
     Response response = await _dio.put(
       quray,
       data: data,
+      options: Options(
+        contentType: "multipart/form-data",
+      ),
     );
 
     return response.data;

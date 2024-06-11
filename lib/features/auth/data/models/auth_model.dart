@@ -2,7 +2,7 @@
 
 class AuthModel {
   String? message;
-  String? token;
+  String? token = '';
   User? user;
 
   AuthModel({this.message, this.token, this.user});

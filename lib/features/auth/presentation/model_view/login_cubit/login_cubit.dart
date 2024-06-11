@@ -20,10 +20,14 @@ class LoginCubit extends Cubit<LoginState> {
     emit(LoginLoading());
     var result = await authRepo.login(email: email, password: password);
     result.fold((success) {
-      CacheHelper.prefs?.setString('token', success.token!);
+      if (success.token!.isNotEmpty) {
+        CacheHelper.prefs?.setString('token', success.token!);
+      }
       model = success;
+      isloading = false;
       emit(LoginSuccess(model: success));
     }, (failure) {
+      isloading = false;
       emit(LoginFailure(error: failure.errorMessage));
     });
   }

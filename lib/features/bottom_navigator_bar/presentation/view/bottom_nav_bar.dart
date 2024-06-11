@@ -18,24 +18,26 @@ class BottomNavBarView extends StatelessWidget {
       builder: (context, state) {
         return Scaffold(
           body: PageView(
+
             physics: const BouncingScrollPhysics(),
             onPageChanged: (value) {
               cubit.animateToPage(value);
               cubit.changeSelecteValue(value);
             },
             controller: cubit.pageController,
+          
             children: cubit.screens,
           ),
           bottomNavigationBar: CurvedNavigationBar(
             key: _bottomNavigationKey,
             index: cubit.navigatorValue,
             height: 60.0,
-            items: <Widget>[
-              const Icon(Icons.search, size: 30),
-              const CartAppBarAction(),
-              const Text(''),
-              const Icon(Icons.notifications_active_rounded, size: 30),
-              const Icon(Icons.perm_identity, size: 30),
+            items: const <Widget>[
+              Icon(Icons.search, size: 30),
+              CartAppBarAction(),
+              Text(''),
+              Icon(Icons.notifications_active_rounded, size: 30),
+              Icon(Icons.perm_identity, size: 30),
             ],
             color: CustomColors.kCyanColor,
             buttonBackgroundColor: CustomColors.kPinkColor,

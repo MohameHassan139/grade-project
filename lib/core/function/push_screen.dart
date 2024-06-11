@@ -101,3 +101,17 @@ Future<void> pushScreen({
     ),
   );
 }
+
+Future<void> pushAndRemoveUntil({
+  required BuildContext context,
+  required Widget screen,
+}) async {
+  Navigator.pushAndRemoveUntil(
+    context,
+    CupertinoPageRoute(
+      builder: (context) => screen,
+    ),
+    (Route<dynamic> route) =>
+        false, // This predicate removes all the previous routes
+  );
+}
