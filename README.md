@@ -46,9 +46,9 @@ An advanced furniture shopping experience powered by **Augmented Reality (AR)** 
 ## 📸 Screenshots & Demo
 
 <!-- Replace these with your actual image links -->
-![Home Screen](https://gallerydrive.my.canva.site/purple-pink-gradient-mobile-application-presentation)
-![AR View]([https://yourdomain.com/screens/ar_view.png](https://www.canva.com/design/DAGpBWnN4xM/fThCsL-WZJSHZlqhQNxa-A/view?utm_content=DAGpBWnN4xM&utm_campaign=designshare&utm_medium=link2&utm_source=uniquelinks&utlId=h3316fe578b))
-![3D Viewer](https://yourdomain.com/screens/3d_view.png)
+![Home Screen](https://github.com/MohameHassan139/grade-project/blob/main/assets/1.jpg)
+
+![3D Viewer](https://github.com/MohameHassan139/grade-project/blob/main/assets/2.jpg)
 
 ---
 
