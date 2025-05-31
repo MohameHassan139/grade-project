@@ -36,7 +36,7 @@ An advanced furniture shopping experience powered by **Augmented Reality (AR)** 
 
 - **Flutter** — Cross-platform mobile app framework  
 - **ARCore / ARKit** — Augmented Reality SDKs for Android/iOS  
-- **Firebase** — Backend services (Auth, Firestore, Storage)  
+- **RESTful APIs, Postman,** — Backend services (Auth, https, Storage)  
 - **3D Viewer** — Flutter plugin for rendering `.glb` / `.usdz` models  
 - **Hive / SQLite** — Local data storage  
 - **Provider / GetX** — State management
